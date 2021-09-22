@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <NavigationBar :currentLink="'Contact'" />
     <h1>contact</h1>
   </div>

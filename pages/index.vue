@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <NavigationBar :currentLink="'About'" />
     <h1>About Page</h1>
     <p>
@@ -18,3 +18,23 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style>
+
+*
+{
+  margin: 0;
+  padding: 0;
+}
+
+.app
+{
+  width: 100vw;
+  background-color: #F5F5F5;
+}
+
+</style>
+
+<style scoped>
+
+</style>
