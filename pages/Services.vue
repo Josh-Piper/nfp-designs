@@ -1,7 +1,8 @@
 <template>
   <div class="app">
-    <NavigationBar :currentLink="'Services'" />
+    <NavigationBar :current-link="'Services'" />
     <h1>services</h1>
+    <Footer />
   </div>
 </template>
 

@@ -1,69 +1,45 @@
-# nfp-designs
+# NFP Designs
 
-## Build Setup
+## Live Demo
+http://nfp-designs.herokuapp.com/
+## Description
 
-```bash
-# install dependencies
-$ npm install
+NFP Designs is a Not-For-Profit organisation
+providing web services to charity organisations.
+This website is made for the final assignment
+for Deakin University SIT120.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## Screenshots
+TBA
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+### Setup
 
-# generate static project
-$ npm run generate
+```sh
+gh repo clone Josh-Piper/nfp-designs # Clone the app
+npm install # Install dependencies
+npm build # Build the application
+npm run dev / npm start # Start the app
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+## Progression
 
-## Special Directories
+This project was created for University. Therefore, the application will be discontinued after finishing the Introduction to Programming unit.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## License
 
-### `assets`
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+## Future Features
 
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
++ About Page
++ Services Page
++ Contact Page
++ Blog Page
++ FAQ Page
 
 
-### `pages`
+## CURRENTLY IMPLEMENTING
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
++ Everything in future features ;)

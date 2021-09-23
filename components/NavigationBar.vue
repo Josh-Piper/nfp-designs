@@ -1,5 +1,8 @@
 <template>
-  <div class="navbar">
+  <div
+    :class="isMenuOpen && 'open-navbar'"
+    class="navbar"
+  >
     <!-- Title of the application -->
     <NuxtLink to="/" class="navbar-home-btn">
       {{ WEBSITE_TITLE }}
@@ -44,7 +47,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-
 export default Vue.extend({
   // Highlights the current link in the navigation bar
   props: {
@@ -91,24 +93,22 @@ export default Vue.extend({
     text-decoration: none;
     color: white;
   }
-
   .navbar-home-btn:hover
   {
-    color: #b19bec;
+    color: #028FBC;
   }
-
   /* Navbar container as a flexbox */
   .navbar
   {
     display: flex;
     line-height: 80px;
+    max-height: 80px;
     flex-direction: row;
     justify-content: space-between;
     background-color: #324D66;
     color: white;
     padding: 0 5%;
   }
-
   /*
     Set the children of the nav bar to have the height of the parent
     via flexbox
@@ -118,12 +118,10 @@ export default Vue.extend({
     display: flex;
     align-items: stretch;
   }
-
   .navigation-bar-links
   {
     align-items: stretch;
   }
-
   /*
     The appearance of the individual list items
   */
@@ -133,13 +131,10 @@ export default Vue.extend({
     display: flex;
     flex-direction: row;
   }
-
   .navigation-bar-links>ul>li
   {
-
     background-color: #324D66;
   }
-
   /* Appearance of the navbar buttons */
   .navigation-bar-links>ul>li>a
   {
@@ -151,26 +146,22 @@ export default Vue.extend({
     text-decoration: none;
     color: white;
   }
-
   .navigation-bar-links>ul>li>a:hover
   {
     color: #028FBC;
   }
-
   /* The current navigation button bottom-border effect */
   .bold
   {
     font-weight: 900;
     box-shadow: inset 0 -5px 0 #028FBC;
   }
-
   /* Hamburger menu styling */
   .navigation-bar-hamburger-icon
   {
     cursor: pointer;
     display: none;
   }
-
   .navigation-bar-hamburger-icon:hover
   {
     color: #028FBC;
@@ -179,23 +170,24 @@ export default Vue.extend({
   /* Navigation bar appearance from phones */
   @media only screen and (max-width : 600px)
   {
+    div>.open-navbar
+    {
+     max-height: 1000px;
+    }
+
     .navbar-home-btn
     {
       font-size: 1.5em;
     }
-
     /* Hide the navigational bar links until hamburger clicked */
     .navigation-bar-links
     {
       display: none;
     }
-
     .open-hamburger-nav
     {
       display: flex;
-
     }
-
     /*
       Styling on the navigation bar buttons when hamburger
       clicked
@@ -207,26 +199,21 @@ export default Vue.extend({
       flex-direction: column;
       width: 50vw;
     }
-
     .navigation-bar-links>ul
     {
-
       display: flex;
       flex-direction: column;
     }
-
     /* Make each button large and centered within menu */
     .navigation-bar-links>ul>li
     {
       width: 90vw;
       text-align: center;
     }
-
     .navigation-bar-links>ul>li>a
     {
       font-size: 2em;
     }
-
     /* Appearance of hamburger/cross */
     .navigation-bar-hamburger-icon
     {
@@ -237,5 +224,4 @@ export default Vue.extend({
       font-size: 2em;
     }
   }
-
 </style>
