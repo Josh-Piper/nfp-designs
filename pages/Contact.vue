@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <NavigationBar :currentLink="'Contact'" />
+    <NavigationBar :current-link="'Contact'" />
     <h1>contact</h1>
   </div>
 </template>

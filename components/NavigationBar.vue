@@ -102,6 +102,7 @@ export default Vue.extend({
   {
     display: flex;
     line-height: 80px;
+    max-height: 80px;
     flex-direction: row;
     justify-content: space-between;
     background-color: #324D66;

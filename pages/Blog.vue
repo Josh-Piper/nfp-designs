@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <NavigationBar :currentLink="'Blog'" />
+    <NavigationBar :current-link="'Blog'" />
     <h1>blog</h1>
   </div>
 </template>
