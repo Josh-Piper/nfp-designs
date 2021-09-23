@@ -39,7 +39,7 @@ export default Vue.extend({
   .search-bar
   {
     width: 90%;
-    max-height: 60px;
+    max-height: 50px;
     line-height: 50px;
     border-radius: 1em;
     background: #C4C4C4;
@@ -62,7 +62,7 @@ export default Vue.extend({
   input[type=text]
   {
     margin-left: 20px;
-    width: 80%;
+    width: 70%;
     height: 30px;
     border: none;
     background: #C4C4C4;
