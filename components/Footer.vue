@@ -34,6 +34,7 @@ export default Vue.extend({
 
 <style scoped>
 
+  /* Footer's container, set colour, location etc */
   .footer
   {
     background-color: #6A6A6A;
@@ -47,6 +48,7 @@ export default Vue.extend({
     align-content: center;
   }
 
+  /* Children elements - buttons and search bar location*/
   .footer>div
   {
     font-size: 1.5em;
@@ -54,6 +56,7 @@ export default Vue.extend({
     color: white;
   }
 
+  /* Footer buttons appearance */
   .footer>div>a
   {
     text-decoration: none;
@@ -74,6 +77,7 @@ export default Vue.extend({
     justify-content: center;
   }
 
+  /* Set the size of the search bar */
   .footer-search-bar
   {
     display: flex;

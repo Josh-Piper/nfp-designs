@@ -95,7 +95,7 @@ export default Vue.extend({
   }
   .navbar-home-btn:hover
   {
-    color: #b19bec;
+    color: #028FBC;
   }
   /* Navbar container as a flexbox */
   .navbar

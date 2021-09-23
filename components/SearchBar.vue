@@ -1,5 +1,6 @@
 <template>
   <div class="search-bar">
+    <!-- The user can hit enter or the search mark to search -->
     <form @submit.prevent="searchFAQ">
       <input
         type="text"
@@ -37,17 +38,19 @@ export default Vue.extend({
     this.placeholder = this.searchPlaceholder
   },
   methods: {
+    // When search button click, redirect to FAQ
     searchFAQ (): void {
       this.$v.$touch()
 
       if (this.$v.$invalid) {
-        this.placeholder = 'Empty search?'
+        this.placeholder = 'Sorry? I didn\'t get that!'
         return
       }
 
       this.$router.push({ path: `/FAQ/${this.searchQuery}` })
     }
   },
+  // Vuelidate options
   validations: {
     searchQuery: { required }
   }
@@ -56,6 +59,7 @@ export default Vue.extend({
 
 <style scoped>
 
+  /* Search bar appearance, rounded etc. */
   .search-bar
   {
     width: 90%;
@@ -69,6 +73,7 @@ export default Vue.extend({
     align-items: flex-start;
   }
 
+  /* Set the layout for the text input and icon */
   form
   {
     color: #303030;
@@ -79,6 +84,7 @@ export default Vue.extend({
     align-items: center;
   }
 
+  /* Remove default appearance of the input box */
   input[type=text]
   {
     margin-left: 20px;
@@ -93,6 +99,7 @@ export default Vue.extend({
     outline: none;
   }
 
+  /* Search Icon appearance */
   .search-bar-icon
   {
     margin-right: 20px;
