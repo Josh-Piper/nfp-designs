@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <!-- Redirect Links -->
-    <div>
+    <div class="footer-redirect-links">
       <NuxtLink to="/contact">
         Contact
       </NuxtLink>
@@ -15,7 +15,7 @@
 
     <!-- Search Menu -->
     <div class="footer-search-bar">
-      <span>Search Menu lives here</span>
+      <SearchBar :search-placeholder="'Search about something!'" />
     </div>
   </div>
 </template>
@@ -57,12 +57,32 @@ export default Vue.extend({
   .footer>div>a
   {
     text-decoration: none;
+    margin: 0 10px;
     color: white;
   }
 
   .footer>div>a:hover
   {
     color: #63bddb;
+  }
+
+  .footer-redirect-links
+  {
+    display: flex;
+    line-height: auto;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .footer-search-bar
+  {
+    display: flex;
+    line-height: 100px;
+    width: 30%;
+    max-width: 1000px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   /* Footer appearance from phones */
@@ -81,6 +101,11 @@ export default Vue.extend({
       margin: auto;
       width: 100%;
       background-color: #6A6A6A;
+    }
+
+    .footer-search-bar
+    {
+      min-height: 100px;
     }
   }
 
