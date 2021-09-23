@@ -49,6 +49,7 @@ export default Vue.extend({
 
   .footer>div
   {
+    font-size: 1.5em;
     margin: 0 50px;
     color: white;
   }
@@ -61,7 +62,7 @@ export default Vue.extend({
 
   .footer>div>a:hover
   {
-    color: #028FBC;
+    color: #63bddb;
   }
 
   /* Footer appearance from phones */

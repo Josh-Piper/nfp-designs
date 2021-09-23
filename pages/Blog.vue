@@ -2,6 +2,7 @@
   <div class="app">
     <NavigationBar :current-link="'Blog'" />
     <h1>blog</h1>
+    <Footer />
   </div>
 </template>
 
