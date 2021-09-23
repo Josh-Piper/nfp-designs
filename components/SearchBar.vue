@@ -1,7 +1,6 @@
 <template>
   <div class="search-bar">
     <form @submit.prevent="searchFAQ">
-      <p> Text in Search Bar </p>
       <input type="text" :placeholder="searchPlaceholder">
 
       <font-awesome-icon
