@@ -3,8 +3,8 @@
     <form @submit.prevent="searchFAQ">
       <input
         type="text"
-        v-model="searchQuery"
-        :placeholder="searchPlaceholder"
+        v-model="$v.searchQuery.$model"
+        :placeholder="placeholder"
       >
 
       <font-awesome-icon
@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { required } from 'vuelidate/lib/validators'
 
 export default Vue.extend({
   props: {
@@ -28,14 +29,27 @@ export default Vue.extend({
   },
   data () {
     return {
-      searchQuery: ''
+      searchQuery: '',
+      placeholder: ''
     }
+  },
+  mounted () {
+    this.placeholder = this.searchPlaceholder
   },
   methods: {
     searchFAQ (): void {
-      console.log('Click')
+      this.$v.$touch()
+
+      if (this.$v.$invalid) {
+        this.placeholder = 'Empty search?'
+        return
+      }
+
       this.$router.push({ path: `/FAQ/${this.searchQuery}` })
     }
+  },
+  validations: {
+    searchQuery: { required }
   }
 })
 </script>
@@ -83,7 +97,8 @@ export default Vue.extend({
   {
     margin-right: 20px;
     font-size: 1em;
-    transform: rotate(90deg)
+    transform: rotate(90deg);
+    cursor: pointer;
   }
 
 </style>
