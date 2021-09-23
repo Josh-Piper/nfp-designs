@@ -62,7 +62,7 @@ export default Vue.extend({
   },
   // Map the different links from Vuex
   computed: {
-    ...mapState(['navLinks', 'WEBSITE_TITLE'])
+    ...mapState('global', ['navLinks', 'WEBSITE_TITLE'])
   },
   methods: {
     getRouteLink (link: string): string {
