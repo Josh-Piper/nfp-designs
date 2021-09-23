@@ -1,9 +1,14 @@
 <template>
   <div class="search-bar">
     <form @submit.prevent="searchFAQ">
-      <input type="text" :placeholder="searchPlaceholder">
+      <input
+        type="text"
+        v-model="searchQuery"
+        :placeholder="searchPlaceholder"
+      >
 
       <font-awesome-icon
+        @click="searchFAQ"
         :icon="['fas', 'search']"
         class="search-bar-icon"
       />
@@ -23,12 +28,13 @@ export default Vue.extend({
   },
   data () {
     return {
-
+      searchQuery: ''
     }
   },
   methods: {
     searchFAQ (): void {
-      this.$router.push({ path: '/FAQ' })
+      console.log('Click')
+      this.$router.push({ path: `/FAQ/${this.searchQuery}` })
     }
   }
 })
