@@ -1,10 +1,8 @@
 export const state = () => ({
   navLinks: ['About', 'Services', 'Contact', 'Blog', 'FAQ'],
-  isNavOpened: false
+  WEBSITE_TITLE: 'NFP Designs'
 })
 
 export const mutations = {
-  toggleNavOpened (state) {
-    state.isNavOpened = !state.isNavOpened
-  }
+
 }

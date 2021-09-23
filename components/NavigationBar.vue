@@ -1,8 +1,11 @@
 <template>
   <div class="navbar">
+    <!-- Title of the application -->
     <NuxtLink to="/" class="navbar-home-btn">
-      NFP Designs
+      {{ WEBSITE_TITLE }}
     </NuxtLink>
+
+    <!-- Navbar menu icons, cross and bars -->
     <div class="navbar-content">
       <font-awesome-icon
         v-if="isMenuOpen"
@@ -10,6 +13,7 @@
         class="navigation-bar-hamburger-icon"
         @click="toggleHamburgerMenu"
       />
+
       <font-awesome-icon
         v-else
         :icon="['fas', 'bars']"
@@ -17,6 +21,7 @@
         @click="toggleHamburgerMenu"
       />
 
+      <!-- The actual menu buttons rendered as anchor tags -->
       <div class="navigation-bar-links" :class="isMenuOpen && 'open-hamburger-nav'">
         <ul>
           <li
@@ -41,6 +46,7 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 
 export default Vue.extend({
+  // Highlights the current link in the navigation bar
   props: {
     currentLink: {
       type: String,
@@ -52,8 +58,9 @@ export default Vue.extend({
       isMenuOpen: false
     }
   },
+  // Map the different links from Vuex
   computed: {
-    ...mapState(['navLinks'])
+    ...mapState(['navLinks', 'WEBSITE_TITLE'])
   },
   methods: {
     getRouteLink (link: string): string {
@@ -73,7 +80,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-
+  /*
+    The website name in the navigation menu
+    Control the different effects it has.
+  */
   .navbar-home-btn
   {
     font-weight: 900;
@@ -82,12 +92,12 @@ export default Vue.extend({
     color: white;
   }
 
-  .bold
+  .navbar-home-btn:hover
   {
-    font-weight: 900;
-    box-shadow: inset 0 -5px 0 #028FBC;
+    color: #b19bec;
   }
 
+  /* Navbar container as a flexbox */
   .navbar
   {
     display: flex;
@@ -99,6 +109,10 @@ export default Vue.extend({
     padding: 0 5%;
   }
 
+  /*
+    Set the children of the nav bar to have the height of the parent
+    via flexbox
+  */
   .navbar-content
   {
     display: flex;
@@ -110,6 +124,9 @@ export default Vue.extend({
     align-items: stretch;
   }
 
+  /*
+    The appearance of the individual list items
+  */
   .navigation-bar-links>ul
   {
     list-style-type: none;
@@ -123,6 +140,7 @@ export default Vue.extend({
     background-color: #324D66;
   }
 
+  /* Appearance of the navbar buttons */
   .navigation-bar-links>ul>li>a
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -139,69 +157,85 @@ export default Vue.extend({
     color: #028FBC;
   }
 
+  /* The current navigation button bottom-border effect */
+  .bold
+  {
+    font-weight: 900;
+    box-shadow: inset 0 -5px 0 #028FBC;
+  }
+
+  /* Hamburger menu styling */
   .navigation-bar-hamburger-icon
   {
+    cursor: pointer;
     display: none;
   }
 
-    @media only screen and (max-width : 600px) {
+  .navigation-bar-hamburger-icon:hover
+  {
+    color: #028FBC;
+  }
 
-      .navbar-home-btn
-      {
-        font-size: 1.5em;
-      }
-
-      .navigation-bar-links
-      {
-        display: none;
-        /* height: 100vh; */
-      }
-
-      .open-hamburger-nav
-      {
-        display: flex;
-
-      }
-
-      .navbar-content
-      {
-        justify-content: flex-start;
-        align-items: flex-end;
-        flex-direction: column;
-        width: 50vw;
-      }
-
-      .navigation-bar-links
-      {
-
-      }
-
-      .navigation-bar-links>ul
-      {
-
-        display: flex;
-        flex-direction: column;
-      }
-
-      .navigation-bar-hamburger-icon
-      {
-        display: block;
-        align-items: stretch;
-        height: 80px;
-        line-height: 100%;
-        font-size: 2em;
-      }
-
-      .navigation-bar-links>ul>li
-      {
-        width: 90vw;
-        text-align: center;
-      }
-
-      .navigation-bar-links>ul>li>a
-      {
-        font-size: 2em;
-      }
+  /* Navigation bar appearance from phones */
+  @media only screen and (max-width : 600px)
+  {
+    .navbar-home-btn
+    {
+      font-size: 1.5em;
     }
+
+    /* Hide the navigational bar links until hamburger clicked */
+    .navigation-bar-links
+    {
+      display: none;
+    }
+
+    .open-hamburger-nav
+    {
+      display: flex;
+
+    }
+
+    /*
+      Styling on the navigation bar buttons when hamburger
+      clicked
+    */
+    .navbar-content
+    {
+      justify-content: flex-start;
+      align-items: flex-end;
+      flex-direction: column;
+      width: 50vw;
+    }
+
+    .navigation-bar-links>ul
+    {
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Make each button large and centered within menu */
+    .navigation-bar-links>ul>li
+    {
+      width: 90vw;
+      text-align: center;
+    }
+
+    .navigation-bar-links>ul>li>a
+    {
+      font-size: 2em;
+    }
+
+    /* Appearance of hamburger/cross */
+    .navigation-bar-hamburger-icon
+    {
+      display: block;
+      align-items: stretch;
+      height: 80px;
+      line-height: 100%;
+      font-size: 2em;
+    }
+  }
 
 </style>
