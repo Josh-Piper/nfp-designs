@@ -16,6 +16,7 @@
     <!-- Search Menu -->
     <div class="footer-search-bar">
       <SearchBar :search-placeholder="'Search about something!'" />
+      <p>Text in Footer</p>
     </div>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <div class="search-bar">
     <form @submit.prevent="searchFAQ">
+      <p> Text in Search Bar </p>
       <input type="text" :placeholder="searchPlaceholder" />
 
       <font-awesome-icon
@@ -78,12 +79,6 @@ export default Vue.extend({
     margin-right: 20px;
     font-size: 1em;
     transform: rotate(90deg)
-  }
-
-  /* Footer appearance from phones */
-  @media only screen and (max-width : 600px)
-  {
-
   }
 
 </style>
