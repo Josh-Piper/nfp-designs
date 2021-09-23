@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <NavigationBar :currentLink="'FAQ'" />
     <h1>faq</h1>
   </div>
