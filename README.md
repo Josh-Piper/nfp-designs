@@ -42,4 +42,4 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 
 ## CURRENTLY IMPLEMENTING
 
-+ This Project is Depricated and Will Not Receive Future Updates.
++ Everything in future features ;)
