@@ -2,7 +2,7 @@
   <div class="search-bar">
     <form @submit.prevent="searchFAQ">
       <p> Text in Search Bar </p>
-      <input type="text" :placeholder="searchPlaceholder" />
+      <input type="text" :placeholder="searchPlaceholder">
 
       <font-awesome-icon
         :icon="['fas', 'search']"
@@ -28,7 +28,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    searchFAQ () {
+    searchFAQ (): void {
       this.$router.push({ path: '/FAQ' })
     }
   }
