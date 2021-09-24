@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <NavigationBar :current-link="'About'" />
-    <h1>About Page</h1>
+    <p class="section-header-text">Wanting to get started quickly? Choose your Required Need!</p>
     <Footer />
   </div>
 </template>
@@ -19,20 +19,25 @@ export default Vue.extend({
 
 <style>
 
-*
-{
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+  *
+  {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
 
-.app
-{
-  background-color: #F5F5F5;
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-}
+  .app
+  {
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .section-header-text
+  {
+    font-size: 2em;  
+  }
 
 </style>
 
