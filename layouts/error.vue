@@ -21,7 +21,7 @@
         </NuxtLink>
       </div>
     </div>
-    <Footer />
+    <Footer class="stick" />
   </div>
 </template>
 
@@ -37,6 +37,7 @@ export default Vue.extend({
 <style scoped>
   .error-msg
   {
+    margin-top: 50px;
     height: 100vw;
     max-height: 100vh;
     display: flex;
@@ -64,6 +65,12 @@ export default Vue.extend({
     margin-top: 5px;
     color: #324D66;
     font-size: 15em;
+  }
+
+  .stick
+  {
+    position: fixed;
+    bottom: 0;
   }
 
 </style>

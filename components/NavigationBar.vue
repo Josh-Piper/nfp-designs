@@ -224,4 +224,14 @@ export default Vue.extend({
       font-size: 2em;
     }
   }
+
+  /* Navigation bar appearance from phones */
+  @media only screen and (max-width : 320px)
+  {
+    .navbar-home-btn
+    {
+      font-size: 0.75em;
+    }
+  }
+
 </style>
