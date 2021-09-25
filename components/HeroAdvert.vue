@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-container" :style="`color: ${fakeColor}`">
+  <div class="hero-container" :style="`color: ${backgroundColor}`">
 
     <div class="hero-container-title">
       <span>{{ title }}</span>
@@ -7,13 +7,13 @@
 
     <div>
       <div v-for="(step, index) in steps" :key="index" class="hero-container-step" >
-        <span class="hero-container-step-number" :style="`background: ${fakeColor}`">{{ index + 1 }}</span>
+        <span class="hero-container-step-number" :style="`background: ${backgroundColor}`">{{ index + 1 }}</span>
         <span>{{ step || '?' }}</span>
       </div>
     </div>
 
     <div class="hero-container-redirect-title">
-      <NuxtLink :to="`/${redirectLink.route}`" :style="`background: ${fakeColor}`">
+      <NuxtLink :to="`/${redirectLink.route}`" :style="`background: ${backgroundColor}`">
         {{ redirectLink.text }}
       </NuxtLink>
     </div>
@@ -36,11 +36,10 @@ export default Vue.extend({
     redirectLink: {
       required: true,
       type: Object
-    }
-  },
-  data () {
-    return {
-      fakeColor: 'Purple'
+    },
+    backgroundColor: {
+      required: true,
+      type: String
     }
   }
 })
@@ -82,6 +81,11 @@ export default Vue.extend({
     border-radius: 50px;
   }
 
+  .hero-container-redirect-title>a:hover
+  {
+    filter: brightness(1.2);
+  }
+
   .hero-container-step
   {
     margin: 20px 0px;
@@ -99,4 +103,32 @@ export default Vue.extend({
     height: 30px;
   }
 
+  @media only screen and (max-width : 1200px)
+  {
+    .hero-container
+    {
+      width: 325px;
+      font-size: 1.5em;
+    }
+  }
+
+  @media only screen and (max-width : 600px)
+  {
+    .hero-container
+    {
+      width: 250px;
+      font-size: 1.15em;
+    }
+
+    .hero-container-step-number
+    {
+      padding: 0;
+    }
+
+    .hero-container-redirect-title>a
+    {
+      padding: 15px 30px;
+      font-size: 1.15em;
+    }
+  }
 </style>

@@ -2,10 +2,17 @@
   <div class="app">
     <NavigationBar :current-link="'About'" />
     <p class="section-header-text">Wanting to get started quickly? Choose your Required Need!</p>
+
     <div id="about-hero">
       <div v-for="(item, index) in heroContent" :key="index">
-        <HeroAdvert :title="item.title" :steps="item.steps" :redirect-link="item.redirectLink"/>
+        <HeroAdvert
+          :title="item.title"
+          :steps="item.steps"
+          :redirect-link="item.redirectLink"
+          :background-color="item.backgroundColor"
+        />
       </div>
+
     </div>
     <Footer class="footer-main" />
   </div>
@@ -44,9 +51,17 @@ export default Vue.extend({
 
   .footer
   {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     max-height: 150px;
+  /*     
+        height: 50px;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    top:auto;
+    left:0px;
+    width:100%; */
   }
 
   .section-header-text
@@ -62,14 +77,40 @@ export default Vue.extend({
     height: 2em;
   }
 
+  #about-hero
+  {
+    width: 100vw;
+    height: 500px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+   #about-hero>div
+   {
+     margin: 0 30px;
+   }
+
   /* title message sizes responsiveness */
-  @media only screen and (max-width : 915px)
+  @media only screen and (max-width : 950px)
   {
     .section-header-text
     {
       margin-top: 50px;
       font-size: 1.25em;
       height: 1.25em;
+    }
+  }
+
+  @media only screen and (max-width : 800px)
+  {
+    #about-hero
+    {
+      flex-direction: column;
+      height: 1000px;
+      max-height: 1000px;
+      align-items: center;
     }
   }
 
@@ -86,6 +127,11 @@ export default Vue.extend({
     {
       max-height: 175px;
       min-height: 175px;
+    }
+
+    #about-hero>div
+    {
+      margin: 30px 0px;
     }
   }
 

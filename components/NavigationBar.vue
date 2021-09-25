@@ -225,7 +225,6 @@ export default Vue.extend({
     }
   }
 
-  /* Navigation bar appearance from phones */
   @media only screen and (max-width : 320px)
   {
     .navbar-home-btn

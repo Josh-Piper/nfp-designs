@@ -7,7 +7,8 @@ export const state = () => ({
         'Pick your Needs',
         'Design Together!'
       ],
-      redirectLink: { text: 'View Services', route: 'services' }
+      redirectLink: { text: 'View Services', route: 'services' },
+      backgroundColor: '#4C4AA5'
     },
     {
       title: 'Ready?',
@@ -16,7 +17,8 @@ export const state = () => ({
         'Design together',
         'Done!'
       ],
-      redirectLink: { text: 'Contact Us', route: 'contactus' }
+      redirectLink: { text: 'Contact Us', route: 'contact' },
+      backgroundColor: '#028FBC'
     }
   ],
   servicesAndExplanations: [
