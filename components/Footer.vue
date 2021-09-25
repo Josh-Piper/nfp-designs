@@ -111,6 +111,12 @@ export default Vue.extend({
     {
       min-height: 100px;
     }
+
+    .footer-redirect-links
+    {
+      display: flex;
+      line-height: 1em;
+    }
   }
 
 </style>
