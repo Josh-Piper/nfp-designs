@@ -32,7 +32,7 @@ export const state = () => ({
     },
     {
       title: 'Design',
-      content: 'We help you take control of your website design whether it be using  Wordpress or Squarespace, we will help design a responsive and optmised website.\n\nOnce you have a rough idea of what your design to look like, then click Contact Us and we will design it to ensure it is as elegant as possible.'
+      content: 'We help you take control of your website design whether it be using  Wordpress or Squarespace.\n\nWe will help design a responsive and optmised website.\n\nOnce you have a rough idea of what your design to look like, then click Contact Us and we will design it to ensure it is as elegant as possible.'
     }
   ],
   portfolio: [

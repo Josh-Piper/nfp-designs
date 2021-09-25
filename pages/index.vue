@@ -26,6 +26,22 @@
       </div>
     </div>
 
+    <p class="section-header-text">Portfolio</p>
+    <div id="portfolio-description-container">
+      <div id="portfolio-description">
+        The design and functionality of a website is combined. Combing these two user experiences has proven to be effective. Allow your ideas come to fruition while also allowing the users to enjoy an elegant interaction. Ultimately connecting NFP organisations with the designs and functionality required to allow their work to be reached!
+      </div>
+    </div>
+
+    <div class="center-mid">
+      <div id="portfolio-wrapper-container">
+        <div v-for="(item, index) in portfolio" :key="index" class="portfolio-item">
+          <img :src="item.imageSrc" :alt="item.imageAlt" class="portfolio-image":style="`border: solid 7px ${applyBorder(index)}`" />
+          <a target="_blank" :href="`${item.descriptionRedirect}`" class="portfolio-button">{{ item.description }}</a>
+        </div>
+      </div>
+    </div>
+
     <Footer class="footer-main" />
   </div>
 </template>
@@ -36,13 +52,22 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
   computed: {
-    ...mapState('about', ['heroContent', 'servicesAndExplanations'])
+    ...mapState('about', ['heroContent', 'servicesAndExplanations', 'portfolio'])
   },
   methods: {
     getColorForExplanation (explanation: string): string {
       if (explanation === 'Our Motive') {
         return '#195748'
       } else if (explanation === 'Development') {
+        return '#4C4AA5'
+      } else {
+        return '#028FBC'
+      }
+    },
+    applyBorder (index: number): string {
+      if (index >= 4) {
+        return '#195748'
+      } else if (index >= 2) {
         return '#4C4AA5'
       } else {
         return '#028FBC'
@@ -68,6 +93,13 @@ export default Vue.extend({
     flex-direction: column;
     width: 100vw;
     height: auto;
+  }
+
+  .center-mid
+  {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .footer-main
@@ -121,8 +153,8 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
     font-size: 1.5em;
-    width: 325px;
-    min-width: 325px;
+    width: 25%;
+    min-width: 25%;
     margin: 0 30px;
   }
 
@@ -142,6 +174,57 @@ export default Vue.extend({
     margin-bottom: 85px;
     white-space: pre-line;
     padding: 0 15px;
+  }
+
+  #portfolio-description-container
+  {
+    display: flex;
+    justify-content: center;
+  }
+
+  #portfolio-description
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.75em;
+    width: 75%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #portfolio-wrapper-container
+  {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 30px;
+    grid-column-gap: 60px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 60%;
+  }
+
+  .portfolio-item
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .portfolio-image
+  {
+    width: 100%;
+    height: 100%;
+  }
+
+  .portfolio-button
+  {
+    margin-top: 15px;
+    color: white;
+    background: #22be68;
+    text-decoration: none;
+    font-size: 1.15em;
+    padding: 0 25px;
+    border-radius: 25px;
   }
 
   /* title message sizes responsiveness */
@@ -204,6 +287,17 @@ export default Vue.extend({
     {
       height: 600px;
     }
+
+    #portfolio-wrapper-container
+    {
+      grid-template-rows: repeat(6, 1fr);
+      grid-template-columns: 1fr;
+    }
+
+    .portfolio-button
+    {
+      padding: 10px 25px;
+    }
   }
 
   @media only screen and (max-width : 600px)
@@ -219,6 +313,8 @@ export default Vue.extend({
       max-height: 175px;
       min-height: 175px;
     }
+
+
   }
 
 </style>
