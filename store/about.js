@@ -24,15 +24,15 @@ export const state = () => ({
   servicesAndExplanations: [
     {
       title: 'Our Motive',
-      content: 'NFP designs is about providing Not-For-Profit companies with their technology needs.\nWe are run by volunteers and create Open-Source templates and products to allow NFP’s to start and grow quicker.\nWe are always looking  for qualified volunteers. Please view the volunteer tab to find out more!'
+      content: 'NFP designs is about providing Not-For-Profit companies with their technology needs.\n\nWe are run by volunteers and create Open-Source templates and products to allow NFP’s to start and grow quicker.\n\nWe are always looking  for qualified volunteers. Please view the volunteer tab to find out more!'
     },
     {
       title: 'Development',
-      content: 'First we need to discern what type of  development you need!\nIs it mobile or website development? or do you require consultancy to help bring IoT devices to life!\nWe cater a wide range of development, so view our  services and then contact us to bring your idea into fruition.'
+      content: 'First we need to discern what type of  development you need!\n\nIs it mobile or website development? or do you require consultancy to help bring IoT devices to life!\n\nWe cater a wide range of development, so view our  services and then contact us to bring your idea into fruition.'
     },
     {
       title: 'Design',
-      content: 'We help you take control of your website design whether it be using  Wordpress or Squarespace, we will help design a responsive and optmised website.\nOnce you have a rough idea of what your design to look like, then click Contact Us and we will design it to ensure it is as elegant as possible.'
+      content: 'We help you take control of your website design whether it be using  Wordpress or Squarespace, we will help design a responsive and optmised website.\n\nOnce you have a rough idea of what your design to look like, then click Contact Us and we will design it to ensure it is as elegant as possible.'
     }
   ],
   portfolio: [

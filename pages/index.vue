@@ -16,7 +16,14 @@
 
     <p class="section-header-text">What is NFP Designs and how does it work?</p>
     <div id="about-nfp-descriptions">
-      <p>agf</p>
+      <div v-for="(item, index) in servicesAndExplanations" :key="index" class="about-nfp-descriptions-container">
+        <div class="about-nfp-descriptions-title" :style="`background: ${getColorForExplanation(item.title)}`">
+          {{ item.title }}
+        </div>
+        <div class="about-nfp-descriptions-content">
+          {{ item.content }}
+        </div>
+      </div>
     </div>
 
     <Footer class="footer-main" />
@@ -29,10 +36,18 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
   computed: {
-    ...mapState('about', ['heroContent'])
+    ...mapState('about', ['heroContent', 'servicesAndExplanations'])
   },
-  mounted () {
-    console.log(this.heroContent)
+  methods: {
+    getColorForExplanation (explanation: string): string {
+      if (explanation === 'Our Motive') {
+        return '#4C4AA5'
+      } else if (explanation === 'Development') {
+        return '#4C4AA5'
+      } else {
+        return '#028FBC'
+      }
+    }
   }
 })
 </script>
@@ -58,7 +73,7 @@ export default Vue.extend({
   .footer-main
   {
     height: 150px;
-    position: absolute;
+    position: relative;
     bottom: 0;
     top: auto;
   }
@@ -88,9 +103,45 @@ export default Vue.extend({
   }
 
    #about-hero>div
-   {
-     margin: 0 30px;
-   }
+  {
+    margin: 0 30px;
+  }
+
+  #about-nfp-descriptions
+  {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+  }
+
+  .about-nfp-descriptions-container
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5em;
+    width: 400px;
+    margin: 0 30px;
+  }
+
+  .about-nfp-descriptions-title
+  {
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    padding: 10px 0 20px 0;
+  }
+
+  .about-nfp-descriptions-content
+  {
+    background: white;
+    height: 500px;
+    margin-bottom: 85px;
+    white-space: pre-line;
+    padding: 0 15px;
+  }
 
   /* title message sizes responsiveness */
   @media only screen and (max-width : 950px)
