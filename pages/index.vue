@@ -41,7 +41,7 @@ export default Vue.extend({
   methods: {
     getColorForExplanation (explanation: string): string {
       if (explanation === 'Our Motive') {
-        return '#4C4AA5'
+        return '#195748'
       } else if (explanation === 'Development') {
         return '#4C4AA5'
       } else {
@@ -102,7 +102,7 @@ export default Vue.extend({
     justify-content: center;
   }
 
-   #about-hero>div
+  #about-hero>div
   {
     margin: 0 30px;
   }
@@ -112,7 +112,7 @@ export default Vue.extend({
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
   }
 
   .about-nfp-descriptions-container
@@ -121,7 +121,8 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
     font-size: 1.5em;
-    width: 400px;
+    width: 325px;
+    min-width: 325px;
     margin: 0 30px;
   }
 
@@ -149,8 +150,21 @@ export default Vue.extend({
     .section-header-text
     {
       margin-top: 50px;
-      font-size: 1.25em;
+      font-size: 1.5em;
       height: 1.25em;
+      text-align: center;
+    }
+
+    .about-nfp-descriptions-container
+    {
+      width: 200px;
+      min-width: 200px;
+      font-size: 1em;
+    }
+
+    .about-nfp-descriptions-content
+    {
+      height: 400px;
     }
   }
 
@@ -173,15 +187,31 @@ export default Vue.extend({
     {
        position: relative;
     }
+
+    #about-nfp-descriptions
+    {
+      flex-direction: column;
+      align-items: center;
+      font-size: 1.5em;
+    }
+
+    .about-nfp-descriptions-container
+    {
+      width: 350px;
+    }
+
+    .about-nfp-descriptions-content
+    {
+      height: 600px;
+    }
   }
 
   @media only screen and (max-width : 600px)
   {
     .section-header-text
     {
-       margin-top: 15px;
-      font-size: 1em;
-      height: 1em;
+      width: 80%;
+      padding-bottom: 30px;
     }
 
     .footer-main

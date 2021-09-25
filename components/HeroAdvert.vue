@@ -122,8 +122,8 @@ export default Vue.extend({
   {
     .hero-container
     {
-      width: 250px;
-      font-size: 1.15em;
+      width: 300px;
+      font-size: 1.5em;
     }
 
     .hero-container-step-number
