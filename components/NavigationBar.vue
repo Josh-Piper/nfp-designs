@@ -88,6 +88,7 @@ export default Vue.extend({
   */
   .navbar-home-btn
   {
+    background-color: #324D66;
     font-weight: 900;
     font-size: 2em;
     text-decoration: none;
@@ -115,6 +116,7 @@ export default Vue.extend({
   */
   .navbar-content
   {
+    background-color: #324D66;
     display: flex;
     align-items: stretch;
   }
@@ -138,6 +140,7 @@ export default Vue.extend({
   /* Appearance of the navbar buttons */
   .navigation-bar-links>ul>li>a
   {
+    background-color: #324D66;
     font-family: Arial, Helvetica, sans-serif;
     display: block;
     margin: 0 0.3em;
@@ -159,6 +162,7 @@ export default Vue.extend({
   /* Hamburger menu styling */
   .navigation-bar-hamburger-icon
   {
+    background-color: #324D66;
     cursor: pointer;
     display: none;
   }

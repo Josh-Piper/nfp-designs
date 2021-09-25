@@ -6,7 +6,7 @@
         Contact
       </NuxtLink>
 
-      <span> | </span>
+      <span style="background-color: #6A6A6A;"> | </span>
 
       <NuxtLink to="/blog">
         Blog
@@ -59,6 +59,7 @@ export default Vue.extend({
   /* Footer buttons appearance */
   .footer>div>a
   {
+    background-color: #6A6A6A;
     text-decoration: none;
     margin: 0 10px;
     color: white;
@@ -71,6 +72,7 @@ export default Vue.extend({
 
   .footer-redirect-links
   {
+    background-color: #6A6A6A;
     display: flex;
     line-height: auto;
     flex-direction: row;
@@ -80,6 +82,7 @@ export default Vue.extend({
   /* Set the size of the search bar */
   .footer-search-bar
   {
+    background-color: #6A6A6A;
     display: flex;
     line-height: 100px;
     width: 30%;
@@ -114,6 +117,7 @@ export default Vue.extend({
 
     .footer-redirect-links
     {
+      padding-top: 20px;
       display: flex;
       line-height: 1em;
     }

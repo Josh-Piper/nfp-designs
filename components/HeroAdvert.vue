@@ -59,6 +59,11 @@ export default Vue.extend({
     font-size: 2.25em;
   }
 
+  .hero-container span, .hero-container div
+  {
+    background: white;
+  }
+
   .hero-container-title
   {
     margin-top: 30px;
@@ -88,6 +93,7 @@ export default Vue.extend({
 
   .hero-container-step
   {
+    background: white;
     margin: 20px 0px;
   }
 
