@@ -39,30 +39,82 @@
       </div>
     </div>
 
+    <!-- Show the form when the user clicks above buttons ^^^ -->
     <div v-show="enquirySelect !== ''">
       <p class="section-header-text">{{ enquirySelect }}</p>
-      <form @submit.prevent="submitContact">
-        hi
-      </form>
+      <div id="contact-form">
+        <form
+          @submit.prevent="submitContact"
+          :style="`background: ${getCorrespondingFormColor()};`"
+        >
+          <!-- Global form data related to all forms -->
+          <div v-for="(formData, index) in basicFormData" :key="index" :style="`background: ${getCorrespondingFormColor()};`">
+            <label :for="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
+              {{ formData.text }}
+            </label>
+            <input type="text" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+          </div>
+
+          <!-- Custom form data -->
+          <div v-for="(formData, index) in additionalFormData[enquirySelect]" :key="index" :style="`background: ${getCorrespondingFormColor()};`">
+            <label :for="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
+              {{ formData.text }}
+            </label>
+            <input :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+          </div>
+
+          <!-- Comments regarding the contact -->
+          <div :style="`background: ${getCorrespondingFormColor()};`">
+            <label for="comments" :style="`background: ${getCorrespondingFormColor()};`">
+              Comments
+            </label>
+            <textarea name="comments" :style="`background: ${getCorrespondingFormColor()};`" />
+          </div>
+
+          <!-- Submit the form -->
+          <span class="submit-button" :style="`background: ${getCorrespondingFormColor()};`">
+            <button @click="submitContact" :style="`background: ${getCorrespondingFormColor()};`">Submit</button>
+          </span>
+        </form>
+      </div>
     </div>
+
     <Footer class="footer-main" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   data () {
     return {
-      enquirySelect: '',
+      enquirySelect: 'General Enquiry',
       contactButtons: [
         { colorCode: '#195748', enquiryText: 'General Enquiry' },
         { colorCode: '#4C4AA5', enquiryText: 'Service Enquiry' },
         { colorCode: '#028FBC', enquiryText: 'Volunteering & Contributing' }
-      ]
+      ],
+      basicFormData: [
+        { text: 'Your name', name: 'form-name' },
+        { text: 'Company name', name: 'form-company-name' },
+        { text: 'Email address', name: 'form-email-address' },
+        { text: 'Phone nunber', name: 'form-phone-number' }
+      ],
+      additionalFormData: {
+        'General Enquiry': [],
+        'Service Enquiry': [
+          { type: 'select', text: 'Related service', name: 'form-service-type' }
+        ],
+        'Volunteering & Contributing': [
+
+        ]
+      }
     }
+  },
+  computed: {
+    ...mapState('services', ['standardServices', 'preiumiumServices'])
   },
   methods: {
     submitContact () {
@@ -72,6 +124,10 @@ export default Vue.extend({
     },
     updateEnquiryText (newEnquiryText: string): void {
       this.enquirySelect = newEnquiryText
+    },
+    getCorrespondingFormColor (): string {
+      const found = this.contactButtons.find(btn => btn.enquiryText === this.enquirySelect)
+      return found?.colorCode || 'white'
     }
   }
 })
@@ -170,6 +226,86 @@ export default Vue.extend({
     text-align: center;
     cursor: pointer;
     color: white;
+  }
+
+  .submit-button
+  {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .submit-button>button
+  {
+    padding: 15px 25px;
+    filter: brightness(125%);
+    box-shadow: 0 0 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1.15em;
+  }
+
+  .submit-button>button:hover
+  {
+    filter: brightness(200%);
+    color: white;
+  }
+
+  #contact-form
+  {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+  }
+
+  #contact-form>form
+  {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 30px;
+    margin-bottom: 25px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+  }
+
+  #contact-form>form>div
+  {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #contact-form>form>div>label
+  {
+    width: 100%;
+    padding: 0;
+    margin: 5px 0;
+    font-weight: 600;
+  }
+
+  #contact-form>form>div>input, #contact-form>form>div>textarea
+  {
+    color: white;
+    font-size: 1em;
+    filter: brightness(80%);
+    padding: 7.5px 5px;
+    border: none;
+    margin-bottom: 15px;
+  }
+
+  #contact-form>form>input:focus
+  {
+    outline: none;
+  }
+
+  #contact-form>form>div>textarea
+  {
+    resize: vertical;
+    height: 200px;
   }
 
   @media only screen and (max-width : 1600px)
