@@ -40,19 +40,19 @@
     </div>
 
     <!-- Show the form when the user clicks above buttons ^^^ -->
+    <p v-show="enquirySelect !== ''" class="section-header-text">{{ enquirySelect }}</p>
     <div v-show="enquirySelect !== ''">
-      <p class="section-header-text">{{ enquirySelect }}</p>
       <div id="contact-form">
         <form
           @submit.prevent="submitContact"
           :style="`background: ${getCorrespondingFormColor()};`"
         >
           <!-- Global form data related to all forms -->
-          <div v-for="(formData, index) in basicFormData" :key="index" :style="`background: ${getCorrespondingFormColor()};`">
+          <div v-for="(formData, index) in basicFormData" :key="index + formData.name" :style="`background: ${getCorrespondingFormColor()};`">
             <label :for="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
-              {{ formData.text }}
+              {{ formData.text }}  {{ (formData.text === 'Your name' || formData.text === 'Email address') ? '*' : '' }}
             </label>
-            <input type="text" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+            <input v-model.lazy="form[formData.name]" type="text" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
           </div>
 
           <!-- Custom form data -->
@@ -60,17 +60,43 @@
             <label :for="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
               {{ formData.text }}
             </label>
-            <input :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+
+            <!-- if the extra form is <select> and is requiring the use of services from the computed component -->
+            <div v-if="formData.type === 'select' && formData.options === 'services'" :style="`background: ${getCorrespondingFormColor()};`">
+              <select :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
+                <option v-for="(service, idx) in standardServices" :key="idx" :style="`background: ${getCorrespondingFormColor()};`" :value="service.serviceName">
+                  {{ service.serviceName }}
+                </option>
+                <option v-for="(service, idx) in preiumiumServices" :key="idx + 1000" :style="`background: ${getCorrespondingFormColor()};`" :value="service.serviceName">
+                  {{ service.serviceName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- else if the extra form is a custom <select> -->
+            <div v-else-if="formData.type === 'select'" :style="`background: ${getCorrespondingFormColor()};`">
+              <select :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
+                <option v-for="(option) in formData.options" :key="option" :style="`background: ${getCorrespondingFormColor()};`" :value="option">
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Otherwise the new form content is text input -->
+            <div v-else :style="`background: ${getCorrespondingFormColor()};`" >
+              <input :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+            </div>
           </div>
 
           <!-- Comments regarding the contact -->
           <div :style="`background: ${getCorrespondingFormColor()};`">
             <label for="comments" :style="`background: ${getCorrespondingFormColor()};`">
-              Comments
+              Comments *
             </label>
-            <textarea name="comments" :style="`background: ${getCorrespondingFormColor()};`" />
+            <textarea v-model="form['form-comments']" name="comments" :style="`background: ${getCorrespondingFormColor()};`" />
           </div>
 
+          <p v-show="formError" style="color: #ffcfcf;" :style="`background: ${getCorrespondingFormColor()};`" >Ensure astrix details are filled out</p>
           <!-- Submit the form -->
           <span class="submit-button" :style="`background: ${getCorrespondingFormColor()};`">
             <button @click="submitContact" :style="`background: ${getCorrespondingFormColor()};`">Submit</button>
@@ -105,12 +131,26 @@ export default Vue.extend({
       additionalFormData: {
         'General Enquiry': [],
         'Service Enquiry': [
-          { type: 'select', text: 'Related service', name: 'form-service-type' }
+          { type: 'select', text: 'Related service', name: 'form-service-type', select: 'services', options: 'services' }
         ],
         'Volunteering & Contributing': [
-
+          {
+            type: 'select',
+            text: 'Your job role',
+            name: 'form-job-role',
+            select: 'services',
+            options: ['Junior Software Developer', 'Software Developer', 'Senior Software Developer', 'Software Architect', 'Marketer']
+          }
         ]
-      }
+      },
+      form: {
+        'form-name': '',
+        'form-company-name': '',
+        'form-email-address': '',
+        'form-phone-nunber': '',
+        'form-comments': ''
+      },
+      formError: false
     }
   },
   computed: {
@@ -118,7 +158,15 @@ export default Vue.extend({
   },
   methods: {
     submitContact () {
-      // Vuelidate
+      const isValid = !(
+        this.form['form-name'] === '' &&
+        this.form['form-email-address'] === '' &&
+        this.form['form-comments'] === '')
+
+      if (!isValid) {
+        this.formError = true
+      }
+
       // Do nothing - Send details via. email correspondance to an API
       // further validation at the back-end API level
     },
@@ -273,13 +321,13 @@ export default Vue.extend({
     font-size: 1em;
   }
 
-  #contact-form>form>div
+  #contact-form>form>div, #contact-form>form>div>div
   {
     display: flex;
     flex-direction: column;
   }
 
-  #contact-form>form>div>label
+  #contact-form>form>div>label, #contact-form>form>div>div>label
   {
     width: 100%;
     padding: 0;
@@ -287,7 +335,8 @@ export default Vue.extend({
     font-weight: 600;
   }
 
-  #contact-form>form>div>input, #contact-form>form>div>textarea
+  #contact-form>form>div>input, #contact-form>form>div>div>input,
+  #contact-form>form>div>textarea, #contact-form>form>div>div>select
   {
     color: white;
     font-size: 1em;
