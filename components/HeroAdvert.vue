@@ -5,6 +5,7 @@
       <span>{{ title }}</span>
     </div>
 
+  <!-- Draw each step for the hero container. Protect against null values -->
     <div>
       <div v-for="(step, index) in steps" :key="index" class="hero-container-step" >
         <span class="hero-container-step-number" :style="`background: ${backgroundColor}`">{{ index + 1 }}</span>
@@ -23,6 +24,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
+// Based on props being passed in.
 export default Vue.extend({
   props: {
     title: {
@@ -47,6 +49,7 @@ export default Vue.extend({
 
 <style scoped>
 
+  /* Define appearance of the container, i.e. white box */
   .hero-container
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -64,6 +67,7 @@ export default Vue.extend({
     background: white;
   }
 
+  /* Set the title text appearance */
   .hero-container-title
   {
     margin-top: 30px;
@@ -77,6 +81,7 @@ export default Vue.extend({
     margin-bottom: 50px;
   }
 
+  /* Set the button to be bold and clickable */
   .hero-container-redirect-title>a
   {
     text-decoration: none;
@@ -91,6 +96,10 @@ export default Vue.extend({
     filter: brightness(1.2);
   }
 
+  /*
+  Set the appearance for each step. Have it aligned in the middle
+  floating to the left
+  */
   .hero-container-step
   {
     background: white;
@@ -109,6 +118,7 @@ export default Vue.extend({
     height: 30px;
   }
 
+  /* Make the container smaller at 1200px */
   @media only screen and (max-width : 1200px)
   {
     .hero-container
@@ -118,6 +128,7 @@ export default Vue.extend({
     }
   }
 
+  /* Set the mobile responsiveness of the hero container */
   @media only screen and (max-width : 600px)
   {
     .hero-container

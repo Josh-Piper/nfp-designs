@@ -1,6 +1,6 @@
 <template>
   <div class="get-started-container">
-
+    <!-- Getting started text -->
     <div class="get-started-text">
       <span class="get-started-text-main">
         READY TO GET STARTED?
@@ -9,7 +9,7 @@
         Let's make it happen!
       </span>
     </div>
-
+    <!-- Getting start button -->
     <div class="get-started-button">
       <NuxtLink to="/contact">
         Contact Us
@@ -18,20 +18,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
-  data () {
-    return {
-      isMenuOpen: false
-    }
-  }
-})
-</script>
-
 <style scoped>
 
+  /* Style the container into a border box */
   .get-started-container
   {
     display: flex;
@@ -45,6 +34,7 @@ export default Vue.extend({
     border-radius: 35px;
   }
 
+  /* Set the text appearance */
   .get-started-text
   {
     display: flex;
@@ -64,6 +54,7 @@ export default Vue.extend({
     background: #C4C4C4;
   }
 
+  /* Set the appearance of the contact us button */
   .get-started-button
   {
     line-height: 1.5em;
@@ -71,7 +62,6 @@ export default Vue.extend({
     flex-direction: column;
     align-items: center;
     background-color: #4473EA;
-    padding: 20px 30px;
     border-radius: 50px;
   }
 
@@ -82,11 +72,16 @@ export default Vue.extend({
     font-weight: bolder;
     font-size: 1.25em;
     font-family: Arial, Helvetica, sans-serif;
+    padding: 20px 30px;
+    border-radius: 50px;
     text-decoration: none;
   }
 
+  /* Update responsiveness by changing row to column layout */
+
   @media only screen and (max-width : 950px)
   {
+    /* Make the text smaller between 950 to 801 */
     .get-started-container
     {
       width: 600px;
@@ -94,6 +89,7 @@ export default Vue.extend({
     }
   }
 
+  /* Update layout from row to column */
   @media only screen and (max-width : 800px)
   {
     .get-started-container

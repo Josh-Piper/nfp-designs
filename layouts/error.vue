@@ -1,6 +1,8 @@
 <template>
   <div class="app">
     <NavigationBar :current-link="'null'" />
+
+    <!-- Draw the error message details -->
     <div class="error-msg">
       <div class="error-msg-msgs">
         <h1 id="error-occurred-msg">
@@ -8,6 +10,7 @@
         </h1>
         <h2>Page not found!</h2>
 
+        <!-- Draw the image and redirect button -->
         <font-awesome-icon
           :icon="['fas', 'surprise']"
           class="error-msg-surprise-icon"

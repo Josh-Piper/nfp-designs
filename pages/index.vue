@@ -2,6 +2,8 @@
   <div class="app">
     <NavigationBar :current-link="'About'" />
 
+    <!-- All details are drawn from a JSON file to represent APIs for the front-end -->
+    <!-- NFP Designs main services -->
     <p class="section-header-text">Wanting to get started quickly? Choose your Required Need!</p>
     <div id="about-hero">
       <div v-for="(item, index) in heroContent" :key="index">
@@ -14,6 +16,7 @@
       </div>
     </div>
 
+    <!-- NFP Designs Explanations -->
     <p class="section-header-text">What is NFP Designs and how does it work?</p>
     <div id="about-nfp-descriptions">
       <div v-for="(item, index) in servicesAndExplanations" :key="index" class="about-nfp-descriptions-container">
@@ -26,26 +29,28 @@
       </div>
     </div>
 
+    <!-- NFP Design Portfolio -->
     <p class="section-header-text">Portfolio</p>
     <div id="portfolio-description-container">
       <div id="portfolio-description">
         The design and functionality of a website is combined. Combing these two user experiences has proven to be effective. Allow your ideas come to fruition while also allowing the users to enjoy an elegant interaction. Ultimately connecting NFP organisations with the designs and functionality required to allow their work to be reached!
       </div>
     </div>
-
     <div class="center-mid">
       <div id="portfolio-wrapper-container">
         <div v-for="(item, index) in portfolio" :key="index" class="portfolio-item">
-          <img :src="item.imageSrc" :alt="item.imageAlt" class="portfolio-image":style="`border: solid 7px ${applyBorder(index)}`" />
+          <a target="_blank" :href="`${item.descriptionRedirect}`" style="margin-bottom: 15px;">
+            <img :src="item.imageSrc" :alt="item.imageAlt" class="portfolio-image" :style="`border: solid 7px ${applyBorder(index)}`" />
+          </a>
           <a target="_blank" :href="`${item.descriptionRedirect}`" class="portfolio-button">{{ item.description }}</a>
         </div>
       </div>
     </div>
 
+    <!-- NFP Design getting start button -->
     <div class="get-started-container">
       <GetStarted />
     </div>
-
 
     <Footer class="footer-main" />
   </div>
@@ -57,9 +62,11 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
   computed: {
+    // Map the different Vuex json details as an object.
     ...mapState('about', ['heroContent', 'servicesAndExplanations', 'portfolio'])
   },
   methods: {
+    // These methods are for setting the colour for the UI
     getColorForExplanation (explanation: string): string {
       if (explanation === 'Our Motive') {
         return '#195748'
@@ -83,7 +90,11 @@ export default Vue.extend({
 </script>
 
 <style>
-
+  /*
+  Note, these are the only NON-SCOPED styles
+  Hence, remove all default styling and take up 100% of the screen
+  with the footer located at the bottom
+  */
   *
   {
     background-color: #F5F5F5;
@@ -115,6 +126,7 @@ export default Vue.extend({
     top: auto;
   }
 
+  /* Set the appearance of the reusable header text (in a p tag) */
   .section-header-text
   {
     width: 100vw;
@@ -129,6 +141,7 @@ export default Vue.extend({
     height: 2em;
   }
 
+  /* Set the hero container to be in a row-column system */
   #about-hero
   {
     width: 100vw;
@@ -144,6 +157,7 @@ export default Vue.extend({
     margin: 0 30px;
   }
 
+  /* Set the appearance for the NFP eexplanations about how it works */
   #about-nfp-descriptions
   {
     display: flex;
@@ -152,6 +166,7 @@ export default Vue.extend({
     width: 100%;
   }
 
+  /* Set the container to be based on percentages for responsiveness */
   .about-nfp-descriptions-container
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -172,14 +187,19 @@ export default Vue.extend({
     padding: 10px 0 20px 0;
   }
 
+  /* The NFP description content depicts the 'height' of the container. */
   .about-nfp-descriptions-content
   {
     background: white;
-    height: 625px;
+    height: 525px;
     margin-bottom: 85px;
     white-space: pre-line;
     padding: 0 15px;
   }
+
+  /*
+    Set the appearance of the portfolio text and portfolio items.
+  */
 
   #portfolio-description-container
   {
@@ -196,6 +216,10 @@ export default Vue.extend({
     margin-bottom: 20px;
   }
 
+  /*
+  Draw each portfolio item in a grid fasion to control
+  the presentation of each individual item
+  */
   #portfolio-wrapper-container
   {
     display: grid;
@@ -232,6 +256,7 @@ export default Vue.extend({
     border-radius: 25px;
   }
 
+  /* Set the  container for the getting started component */
   .get-started-container
   {
     margin: 50px 0;
@@ -240,8 +265,16 @@ export default Vue.extend({
     justify-content: center;
   }
 
-  /* title message sizes responsiveness */
-  @media only screen and (max-width : 950px)
+  /* Update the website for responsiveness */
+  @media only screen and (max-width : 1100px)
+  {
+    .about-nfp-descriptions-container
+    {
+      font-size: 1.25em;
+    }
+  }
+
+  @media only screen and (max-width : 1000px)
   {
     .section-header-text
     {
@@ -260,10 +293,11 @@ export default Vue.extend({
 
     .about-nfp-descriptions-content
     {
-      height: 450px;
+      height: 505px;
     }
   }
 
+  /* Update the website into a column layout opposed to rows */
   @media only screen and (max-width : 800px)
   {
 
@@ -335,12 +369,6 @@ export default Vue.extend({
       max-height: 175px;
       min-height: 175px;
     }
-
-
   }
-
-</style>
-
-<style scoped>
 
 </style>
