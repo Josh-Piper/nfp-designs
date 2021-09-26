@@ -62,26 +62,29 @@ export default Vue.extend({
   /* Search bar appearance, rounded etc. */
   .search-bar
   {
+    background: #C4C4C4;
     width: 90%;
     max-height: 50px;
     line-height: 50px;
-    border-radius: 1em;
-    background: #C4C4C4;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    border-radius: 30px;
   }
 
   /* Set the layout for the text input and icon */
   form
   {
+    background: #C4C4C4;
     color: #303030;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-radius: 30px;
+
   }
 
   /* Remove default appearance of the input box */
@@ -102,6 +105,7 @@ export default Vue.extend({
   /* Search Icon appearance */
   .search-bar-icon
   {
+    background: #C4C4C4;
     margin-right: 20px;
     font-size: 1em;
     transform: rotate(90deg);

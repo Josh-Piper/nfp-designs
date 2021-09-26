@@ -1,6 +1,8 @@
 <template>
   <div class="app">
     <NavigationBar :current-link="'null'" />
+
+    <!-- Draw the error message details -->
     <div class="error-msg">
       <div class="error-msg-msgs">
         <h1 id="error-occurred-msg">
@@ -8,6 +10,7 @@
         </h1>
         <h2>Page not found!</h2>
 
+        <!-- Draw the image and redirect button -->
         <font-awesome-icon
           :icon="['fas', 'surprise']"
           class="error-msg-surprise-icon"
@@ -21,7 +24,7 @@
         </NuxtLink>
       </div>
     </div>
-    <Footer />
+    <Footer class="footer-main" />
   </div>
 </template>
 
@@ -35,9 +38,14 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+
+  /* Set the error message styling */
   .error-msg
   {
+    background: #F5F5F5;
+    margin-top: 50px;
     height: 100vw;
+    min-height: 80vh;
     max-height: 100vh;
     display: flex;
     flex-direction: row;
