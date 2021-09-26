@@ -42,6 +42,11 @@
       </div>
     </div>
 
+    <div class="get-started-container">
+      <GetStarted />
+    </div>
+
+
     <Footer class="footer-main" />
   </div>
 </template>
@@ -170,7 +175,7 @@ export default Vue.extend({
   .about-nfp-descriptions-content
   {
     background: white;
-    height: 500px;
+    height: 625px;
     margin-bottom: 85px;
     white-space: pre-line;
     padding: 0 15px;
@@ -220,11 +225,19 @@ export default Vue.extend({
   {
     margin-top: 15px;
     color: white;
-    background: #22be68;
+    background: #4473EA;
     text-decoration: none;
     font-size: 1.15em;
     padding: 0 25px;
     border-radius: 25px;
+  }
+
+  .get-started-container
+  {
+    margin: 50px 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
   }
 
   /* title message sizes responsiveness */
@@ -247,12 +260,18 @@ export default Vue.extend({
 
     .about-nfp-descriptions-content
     {
-      height: 400px;
+      height: 450px;
     }
   }
 
   @media only screen and (max-width : 800px)
   {
+
+    .section-header-text
+    {
+      width: 75%;
+    }
+
     #about-hero
     {
       flex-direction: column;
@@ -276,16 +295,19 @@ export default Vue.extend({
       flex-direction: column;
       align-items: center;
       font-size: 1.5em;
+      width: 100%;
+
     }
 
     .about-nfp-descriptions-container
     {
-      width: 350px;
+      width: 80%;
+      /* width: 350px; */
     }
 
     .about-nfp-descriptions-content
     {
-      height: 600px;
+      height: 700px;
     }
 
     #portfolio-wrapper-container

@@ -122,7 +122,7 @@ export default Vue.extend({
   {
     .hero-container
     {
-      width: 300px;
+      width: 80vw;
       font-size: 1.5em;
     }
 
