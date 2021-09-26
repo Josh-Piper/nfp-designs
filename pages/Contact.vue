@@ -23,14 +23,16 @@
         </div>
       </div>
     </div>
-      <p class="section-header-text">Contact Us</p>
+
+    <!-- Contact form buttons -->
     <p class="section-header-text">Select Your Reason for Contact Us</p>
     <div id="reason-for-contacting">
       <div id="reason-for-contacting-buttons">
         <a
           v-for="(item, index) in contactButtons"
           :key="index"
-          @click="updateEnquiryText"
+          @click="updateEnquiryText(item.enquiryText)"
+          :style="`background: ${item.colorCode};`"
         >
           {{ item.enquiryText }}
         </a>
@@ -58,7 +60,7 @@ export default Vue.extend({
       contactButtons: [
         { colorCode: '#195748', enquiryText: 'General Enquiry' },
         { colorCode: '#4C4AA5', enquiryText: 'Service Enquiry' },
-        { colorCode: '028FBC', enquiryText: 'Volunteering & Contributing' }
+        { colorCode: '#028FBC', enquiryText: 'Volunteering & Contributing' }
       ]
     }
   },
@@ -68,8 +70,8 @@ export default Vue.extend({
       // Do nothing - Send details via. email correspondance to an API
       // further validation at the back-end API level
     },
-    updateEnquiryText (event) {
-      console.log(event)
+    updateEnquiryText (newEnquiryText: string): void {
+      this.enquirySelect = newEnquiryText
     }
   }
 })
@@ -140,17 +142,44 @@ export default Vue.extend({
   #reason-for-contacting
   {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
   }
 
   #reason-for-contacting-buttons
   {
-
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 60%;
+    margin-bottom: 50px;
   }
 
   #reason-for-contacting-buttons>a
   {
-    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    width: 300px;
+    height: 125px;
+    font-size: 1.25em;
+    border-radius: 150px;
+    text-align: center;
     cursor: pointer;
+    color: white;
+  }
+
+  @media only screen and (max-width : 1600px)
+  {
+    #reason-for-contacting-buttons>a
+    {
+      width: 225px;
+      height: 100px;
+      font-size: 1.25em;
+    }
   }
 
   @media only screen and (max-width : 1200px)
@@ -169,19 +198,40 @@ export default Vue.extend({
     {
       font-size: 1em;
     }
+
+    #reason-for-contacting-buttons
+    {
+      width: 80%;
+      justify-content: space-between;
+    }
+
+    #reason-for-contacting-buttons>a
+    {
+      width: 175px;
+      height: 75px;
+      font-size: 1em;
+    }
   }
 
   @media only screen and (max-width : 800px)
   {
     #google-maps-api-container, #google-maps-api
     {
-      width: 450px;
-      height: 300px;
+      width: 80vw;
+
     }
 
     #contact-us-details-text-container
     {
-      width: 470px;
+      width: 83vw;
+    }
+
+    #reason-for-contacting-buttons>a
+    {
+      width: 200px;
+      height: 75px;
+      font-size: 1em;
+      margin: 0 10px;
     }
   }
 
@@ -200,6 +250,21 @@ export default Vue.extend({
     #contact-us-details-text-container
     {
       width: 320px;
+    }
+
+    #reason-for-contacting-buttons
+    {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #reason-for-contacting-buttons>a
+    {
+      margin-bottom: 30px;
+      padding: 30px;
+      width: 150px;
+      height: 50px;
+      font-size: 1em;
     }
   }
 
