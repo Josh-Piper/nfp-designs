@@ -183,6 +183,7 @@ export default Vue.extend({
     {
       font-size: 1.5em;
     }
+
     /* Hide the navigational bar links until hamburger clicked */
     .navigation-bar-links
     {

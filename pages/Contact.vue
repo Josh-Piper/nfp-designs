@@ -261,7 +261,7 @@ import { mapState } from 'vuex'
 export default Vue.extend({
   data () {
     return {
-      enquirySelect: 'General Enquiry',
+      enquirySelect: '',
       contactButtons: [
         { colorCode: '#195748', enquiryText: 'General Enquiry' },
         { colorCode: '#4C4AA5', enquiryText: 'Service Enquiry' },

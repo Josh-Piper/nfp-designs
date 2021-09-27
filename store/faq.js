@@ -1,13 +1,23 @@
 export const state = () => ({
   faqData: [
     {
-      question: 'What is the unit team for SIT120',
+      question: 'Who is in the unit team for SIT120?',
       answer: 'Shiva Porkel, Shang Gao, Ting-Chieh Lin and Nisha Kumari',
       type: 'SIT120 Info'
     },
     {
+      question: 'Which tutor in SIT120 is based in Geelong?',
+      answer: 'Shang Gao',
+      type: 'SIT120 Info'
+    },
+    {
+      question: 'What subjects am I enrolled in?',
+      answer: 'SIT120, SIT112 and SIT232',
+      type: 'SIT120 Info'
+    },
+    {
       question: 'What is SIT120',
-      answer: 'Deakin University\'s unit Introduction to Responsive Web Apps',
+      answer: 'Deakin University\'s unit Introduction to Responsive Web Apps which teaches the basics of programming',
       type: 'SIT120 Info'
     },
     {
@@ -23,6 +33,11 @@ export const state = () => ({
     {
       question: 'How do I volunteer/help NFP Designs',
       answer: 'Please use the contact us page and select the Volunteering & Contributing button',
+      type: 'General Enquiries'
+    },
+    {
+      question: 'What are your favourite foods',
+      answer: 'I love big breakfeasts, which includes chorizo, bread and egg. Absolute classic food',
       type: 'General Enquiries'
     }
   ]
