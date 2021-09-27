@@ -9,14 +9,18 @@
         <iframe
           title="NFP Designs location Google Maps"
           id="google-maps-api"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d482.0357086812697!2d145.12065234263872!3d-37.85040594483717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad641c87a7ea72f%3A0x4e5b540a78138a85!2sDeakin%20Launchpad!5e0!3m2!1sen!2sau!4v1632620103737!5m2!1sen!2sau"
+          src="https://tinyurl.com/DeakinSparkMelbLocation"
           allowfullscreen=""
           loading="lazy"
         />
       </div>
       <div id="contact-us-details-text-container">
         <div>
-          <span id="contact-us-details-text-container-title">Interested in meeting with us?</span>
+
+          <span id="contact-us-details-text-container-title">
+            Interested in meeting with us?
+          </span>
+
           <span>Give us a ring on +61 8921 0210</span>
           <span>304 Building 1, Burwood Victoria 3125</span>
           <span>Deakin Launchpad building</span>
@@ -40,7 +44,10 @@
     </div>
 
     <!-- Show the form when the user clicks above buttons ^^^ -->
-    <p v-show="enquirySelect !== ''" class="section-header-text">{{ enquirySelect }}</p>
+    <p v-show="enquirySelect !== ''" class="section-header-text">
+      {{ enquirySelect }}
+    </p>
+
     <div v-show="enquirySelect !== ''">
       <div id="contact-form">
         <form
@@ -48,58 +55,184 @@
           :style="`background: ${getCorrespondingFormColor()};`"
         >
           <!-- Global form data related to all forms -->
-          <div v-for="(formData, index) in basicFormData" :key="index + formData.name" :style="`background: ${getCorrespondingFormColor()};`">
-            <label :for="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
-              {{ formData.text }}  {{ (formData.text === 'Your name' || formData.text === 'Email address') ? '*' : '' }}
+          <div
+            v-for="(formData, index) in basicFormData"
+            :key="index + formData.name"
+            :style="`background: ${getCorrespondingFormColor()};`"
+          >
+            <label
+              :for="formData.name"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
+
+              <!-- Draw the form label and add an astrix if it is required -->
+              {{ formData.text }}
+              {{
+                (formData.text === 'Your name' || formData.text === 'Email address')
+                  ? '*' : ''
+              }}
             </label>
-            <input v-model.lazy="form[formData.name]" type="text" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+
+            <input
+              v-model.lazy="form[formData.name]"
+              :type="(formData.name ==='form-phone-number') ? 'number' : 'text'"
+              :name="formData.name"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
           </div>
 
           <!-- Custom form data -->
-          <div v-for="(formData, index) in additionalFormData[enquirySelect]" :key="index" :style="`background: ${getCorrespondingFormColor()};`">
-            <label :for="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
+          <div
+            v-for="(formData, index) in additionalFormData[enquirySelect]"
+            :key="index"
+            :style="`background: ${getCorrespondingFormColor()};`"
+          >
+
+            <label
+              :for="formData.name"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
               {{ formData.text }}
             </label>
 
-            <!-- if the extra form is <select> and is requiring the use of services from the computed component -->
-            <div v-if="formData.type === 'select' && formData.options === 'services'" :style="`background: ${getCorrespondingFormColor()};`">
-              <select :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
-                <option v-for="(service, idx) in standardServices" :key="idx" :style="`background: ${getCorrespondingFormColor()};`" :value="service.serviceName">
+            <!--
+              if the extra form is <select> and is requiring the use
+              of services from the computed component
+            -->
+            <div
+              v-if="formData.type === 'select' && formData.options === 'services'"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
+              <select
+                :type="formData.type"
+                :name="formData.name"
+                v-model.lazy="form[formData.name]"
+                :style="`background: ${getCorrespondingFormColor()};`"
+              >
+
+              <!-- Draw all the basic services for the service enquiry -->
+                <option
+                  v-for="(service, idx) in standardServices"
+                  :key="idx"
+                  :style="`background: ${getCorrespondingFormColor()};`"
+                  :value="service.serviceName"
+                >
                   {{ service.serviceName }}
                 </option>
-                <option v-for="(service, idx) in preiumiumServices" :key="idx + 1000" :style="`background: ${getCorrespondingFormColor()};`" :value="service.serviceName">
+
+                <!-- Draw all the premium services for the service enquiry -->
+                <option
+                  v-for="(service, idx) in preiumiumServices"
+                  :key="idx + 1000"
+                  :style="`background: ${getCorrespondingFormColor()};`"
+                  :value="service.serviceName"
+                >
                   {{ service.serviceName }}
                 </option>
               </select>
             </div>
 
             <!-- else if the extra form is a custom <select> -->
-            <div v-else-if="formData.type === 'select'" :style="`background: ${getCorrespondingFormColor()};`">
-              <select :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`">
-                <option v-for="(option) in formData.options" :key="option" :style="`background: ${getCorrespondingFormColor()};`" :value="option">
+            <div
+              v-else-if="formData.type === 'select'"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
+              <select
+                :type="formData.type"
+                :name="formData.name"
+                v-model.lazy="form[formData.name]"
+                :style="`background: ${getCorrespondingFormColor()};`"
+              >
+                <option
+                  v-for="(option) in formData.options"
+                  :key="option"
+                  :style="`background: ${getCorrespondingFormColor()};`"
+                  :value="option"
+                >
                   {{ option }}
                 </option>
               </select>
             </div>
 
             <!-- Otherwise the new form content is text input -->
-            <div v-else :style="`background: ${getCorrespondingFormColor()};`" >
-              <input :type="formData.type" :name="formData.name" :style="`background: ${getCorrespondingFormColor()};`" />
+            <div v-else :style="`background: ${getCorrespondingFormColor()};`">
+              <input
+                :type="formData.type"
+                :name="formData.name"
+                :style="`background: ${getCorrespondingFormColor()};`"
+              >
             </div>
+
+            <!--
+            If using volunteering form and states they are a developer
+            Then display checkboxes for them to select what they know.
+            I.e. they know VueJS and Angular but not React
+            -->
+            <div
+              v-if="showWebDevSkill"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
+                <div
+                v-for="(skill, index) in webDevSkills"
+                :key="index"
+                :style="`background: ${getCorrespondingFormColor()};`"
+                style="flex-direction: row;"
+              >
+                <label
+                  :for="skill.name"
+                  :style="`background: ${getCorrespondingFormColor()};`"
+                  style="height: 100%; display: flex; justify-content: space-between"
+                >
+                  Proficiency in {{ skill.text }}
+                  <input
+                    v-model="form[`${skill.name}`]"
+                    type="checkbox"
+                    :name="skill.name"
+                    :value="skill.value"
+                    style="vertical-align: middle;"
+                  >
+                </label>
+              </div>
+            </div>
+
           </div>
 
           <!-- Comments regarding the contact -->
           <div :style="`background: ${getCorrespondingFormColor()};`">
-            <label for="comments" :style="`background: ${getCorrespondingFormColor()};`">
+            <label
+              for="comments"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
               Comments *
             </label>
-            <textarea v-model="form['form-comments']" name="comments" :style="`background: ${getCorrespondingFormColor()};`" />
+
+            <textarea
+              v-model="form['form-comments']"
+              name="comments"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            />
           </div>
 
-          <p v-show="formError" style="color: #ffcfcf;" :style="`background: ${getCorrespondingFormColor()};`" >Ensure astrix details are filled out</p>
+          <!-- Form error message (valdiation) -->
+          <p
+            v-show="formError"
+            style="color: #ffcfcf;"
+            :style="`background: ${getCorrespondingFormColor()};`"
+          >
+            Ensure astrix details are filled out
+          </p>
+
           <!-- Submit the form -->
-          <span class="submit-button" :style="`background: ${getCorrespondingFormColor()};`">
-            <button @click="submitContact" :style="`background: ${getCorrespondingFormColor()};`">Submit</button>
+          <span
+            class="submit-button"
+            :style="`background: ${getCorrespondingFormColor()};`"
+          >
+            <button
+              @click="submitContact"
+              :style="`background: ${getCorrespondingFormColor()};`"
+            >
+              Submit
+            </button>
           </span>
         </form>
       </div>
@@ -143,31 +276,71 @@ export default Vue.extend({
           }
         ]
       },
+      webDevSkills: [
+        { name: 'form-bootstrap', value: 'bootstrap', text: 'BootStrap' },
+        { name: 'form-tailwind', value: 'tailwind', text: 'TailWind' },
+        { name: 'form-scscc', value: 'cscc', text: 'SASS' },
+        { name: 'form-js', value: 'javascript', text: 'JavaScript' },
+        { name: 'form-node', value: 'node', text: 'NodeJS' },
+        { name: 'form-vue', value: 'vue', text: 'VueJS' },
+        { name: 'form-serverless', value: 'serverless', text: 'ServerLess' },
+      ],
       form: {
         'form-name': '',
         'form-company-name': '',
         'form-email-address': '',
         'form-phone-nunber': '',
-        'form-comments': ''
+        'form-comments': '',
+        'form-job-role': '',
+        'form-service-type': '',
+        'form-web-skills': []
       },
-      formError: false
+      formError: false,
+      showWebDevSkill: false
     }
   },
   computed: {
-    ...mapState('services', ['standardServices', 'preiumiumServices'])
+    ...mapState('services', ['standardServices', 'preiumiumServices']),
+    currentJobRoleIsDeveloper (): boolean {
+      return this.form['form-job-role'].toLowerCase().includes('developer')
+    }
+  },
+  watch: {
+    currentJobRoleIsDeveloper (newVal) {
+      if (newVal) {
+        this.showWebDevSkill = true
+      } else {
+        this.showWebDevSkill = false
+      }
+    },
+    enquirySelect (newValue) {
+      if (newValue === 'General Enquiry' || newValue === 'Service Enquiry') {
+        this.showWebDevSkill = false
+      } else if (
+        newValue === 'Volunteering & Contributing' &&
+          this.form['form-job-role'].toLowerCase().includes('developer')
+      ) {
+        this.showWebDevSkill = true
+      }
+    }
   },
   methods: {
     submitContact () {
       const isValid = !(
-        this.form['form-name'] === '' &&
-        this.form['form-email-address'] === '' &&
+        this.form['form-name'] === '' ||
+        this.form['form-email-address'] === '' ||
         this.form['form-comments'] === '')
 
       if (!isValid) {
         this.formError = true
+      } else {
+        this.formError = false
       }
 
-      // Do nothing - Send details via. email correspondance to an API
+      // We can use the current selected enquiry type and the form completed
+      // data to further validate and send the required data to the backend.
+      // Obviously, we have the issue here of holding ALL data
+      // despite which enquiry we selected
       // further validation at the back-end API level
     },
     updateEnquiryText (newEnquiryText: string): void {
