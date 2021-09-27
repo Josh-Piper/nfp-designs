@@ -28,9 +28,10 @@
       </div>
     </div>
 
-    <!-- Contact form buttons -->
+    <!-- Contact form buttons, allows showing the actual form -->
     <p class="section-header-text">Select Your Reason for Contact Us</p>
     <div id="reason-for-contacting">
+      <!-- Create each button -->
       <div id="reason-for-contacting-buttons">
         <a
           v-for="(item, index) in contactButtons"
@@ -43,7 +44,7 @@
       </div>
     </div>
 
-    <!-- Show the form when the user clicks above buttons ^^^ -->
+    <!-- The actual contact form(s) -->
     <p v-show="enquirySelect !== ''" class="section-header-text">
       {{ enquirySelect }}
     </p>
@@ -54,7 +55,7 @@
           @submit.prevent="submitContact"
           :style="`background: ${getCorrespondingFormColor()};`"
         >
-          <!-- Global form data related to all forms -->
+          <!-- Global form data related to all forms, i.e. email, comments etc -->
           <div
             v-for="(formData, index) in basicFormData"
             :key="index + formData.name"
@@ -81,7 +82,7 @@
             >
           </div>
 
-          <!-- Custom form data -->
+          <!-- Custom form data, for the additiona forms, i.e. not GENERAL -->
           <div
             v-for="(formData, index) in additionalFormData[enquirySelect]"
             :key="index"
@@ -96,7 +97,7 @@
             </label>
 
             <!--
-              if the extra form is <select> and is requiring the use
+              if the extra form content is <select> and is requiring the use
               of services from the computed component
             -->
             <div
@@ -164,9 +165,9 @@
             </div>
 
             <!--
-            If using volunteering form and states they are a developer
-            Then display checkboxes for them to select what they know.
-            I.e. they know VueJS and Angular but not React
+              If using volunteering form and states they are a developer
+              Then display checkboxes for them to select what they know.
+              I.e. they know VueJS and Angular but not React
             -->
             <div
               v-if="showWebDevSkill"
@@ -222,6 +223,15 @@
             Ensure astrix details are filled out
           </p>
 
+          <!-- Let the user know the form is submitted! -->
+          <p
+            v-show="formSubmitted"
+            style="color: green;"
+            :style="`background: ${getCorrespondingFormColor()};`"
+          >
+            Form submitted!
+          </p>
+
           <!-- Submit the form -->
           <span
             class="submit-button"
@@ -255,12 +265,14 @@ export default Vue.extend({
         { colorCode: '#4C4AA5', enquiryText: 'Service Enquiry' },
         { colorCode: '#028FBC', enquiryText: 'Volunteering & Contributing' }
       ],
+      // relevant to all forms
       basicFormData: [
         { text: 'Your name', name: 'form-name' },
         { text: 'Company name', name: 'form-company-name' },
         { text: 'Email address', name: 'form-email-address' },
         { text: 'Phone nunber', name: 'form-phone-number' }
       ],
+      // additional form data
       additionalFormData: {
         'General Enquiry': [],
         'Service Enquiry': [
@@ -276,6 +288,7 @@ export default Vue.extend({
           }
         ]
       },
+      // Checkboxes if the user is a 'developer'
       webDevSkills: [
         { name: 'form-bootstrap', value: 'bootstrap', text: 'BootStrap' },
         { name: 'form-tailwind', value: 'tailwind', text: 'TailWind' },
@@ -285,6 +298,7 @@ export default Vue.extend({
         { name: 'form-vue', value: 'vue', text: 'VueJS' },
         { name: 'form-serverless', value: 'serverless', text: 'ServerLess' },
       ],
+      // maintain ALL of the different form information
       form: {
         'form-name': '',
         'form-company-name': '',
@@ -296,7 +310,8 @@ export default Vue.extend({
         'form-web-skills': []
       },
       formError: false,
-      showWebDevSkill: false
+      showWebDevSkill: false,
+      formSubmitted: false
     }
   },
   computed: {
@@ -335,6 +350,7 @@ export default Vue.extend({
         this.formError = true
       } else {
         this.formError = false
+        this.formSubmitted = true
       }
 
       // We can use the current selected enquiry type and the form completed
@@ -356,6 +372,7 @@ export default Vue.extend({
 
 <style scoped>
 
+  /* Set the appearance of the first contact us container, i.e. for Google Maps and location text */
   #contact-us-details-container
   {
     display: flex;
@@ -365,6 +382,7 @@ export default Vue.extend({
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  /* Set the Google Maps container to have a gradient border */
   #google-maps-api-container
   {
     display: flex;
@@ -383,6 +401,7 @@ export default Vue.extend({
     border: none;
   }
 
+  /* Set the contacat us text to be centered and easily visible */
   #contact-us-details-text-container
   {
     background: #707070;
@@ -397,6 +416,7 @@ export default Vue.extend({
     margin-bottom: 40px;
   }
 
+  /* The text layout for the location text of Google Maps */
   #contact-us-details-text-container > div
   {
     display: flex;
@@ -424,6 +444,7 @@ export default Vue.extend({
     width: 100%;
   }
 
+  /* Formatting for the form buttons */
   #reason-for-contacting-buttons
   {
     display: flex;
@@ -433,6 +454,7 @@ export default Vue.extend({
     margin-bottom: 50px;
   }
 
+  /* Styling of the actual buttons, per enquiry */
   #reason-for-contacting-buttons>a
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -449,6 +471,12 @@ export default Vue.extend({
     color: white;
   }
 
+   #reason-for-contacting-buttons>a:hover
+   {
+     filter: brightness(125%);
+   }
+
+  /* The forms submit button appearance */
   .submit-button
   {
     margin-top: 10px;
@@ -475,6 +503,11 @@ export default Vue.extend({
     color: white;
   }
 
+  /*
+    Layout for the form layout
+    Each label takes 100% of the width so the input is on the next line.
+    Hence, specific formatting is set here
+  */
   #contact-form
   {
     display: flex;
@@ -508,6 +541,7 @@ export default Vue.extend({
     font-weight: 600;
   }
 
+  /* Make all input have a darker colour then the set colour of the form */
   #contact-form>form>div>input, #contact-form>form>div>div>input,
   #contact-form>form>div>textarea, #contact-form>form>div>div>select
   {
@@ -530,6 +564,7 @@ export default Vue.extend({
     height: 200px;
   }
 
+  /* Make the website responsive, specifically the reason for contacting us buttons */
   @media only screen and (max-width : 1600px)
   {
     #reason-for-contacting-buttons>a
@@ -540,6 +575,7 @@ export default Vue.extend({
     }
   }
 
+  /* Make the Google Maps API smaller */
   @media only screen and (max-width : 1200px)
   {
     #google-maps-api-container, #google-maps-api
@@ -571,6 +607,7 @@ export default Vue.extend({
     }
   }
 
+  /* Make the Google Maps API smaller again */
   @media only screen and (max-width : 800px)
   {
     #google-maps-api-container, #google-maps-api
@@ -593,6 +630,7 @@ export default Vue.extend({
     }
   }
 
+  /* Mobile layout */
   @media only screen and (max-width : 600px)
   {
     #google-maps-api-container
