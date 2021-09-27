@@ -300,7 +300,6 @@ export default Vue.extend({
   /* Update the website into a column layout opposed to rows */
   @media only screen and (max-width : 800px)
   {
-
     .section-header-text
     {
       width: 75%;
