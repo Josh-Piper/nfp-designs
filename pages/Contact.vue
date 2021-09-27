@@ -174,7 +174,7 @@
               v-if="showWebDevSkill"
               :style="`background: ${getCorrespondingFormColor()};`"
             >
-                <div
+              <div
                 v-for="(skill, index) in webDevSkills"
                 :key="index"
                 :style="`background: ${getCorrespondingFormColor()};`"
@@ -187,16 +187,16 @@
                 >
                   Proficiency in {{ skill.text }}
                   <input
+                    :id="skill.name"
                     v-model="form[`${skill.name}`]"
                     type="checkbox"
                     :name="skill.name"
                     :value="skill.value"
-                    style="vertical-align: middle;"
+                    style="vertical-align: middle; height: 20px;"
                   >
                 </label>
               </div>
             </div>
-
           </div>
 
           <!-- Comments regarding the contact -->
@@ -261,7 +261,7 @@ import { mapState } from 'vuex'
 export default Vue.extend({
   data () {
     return {
-      enquirySelect: 'General Enquiry',
+      enquirySelect: '',
       contactButtons: [
         { colorCode: '#195748', enquiryText: 'General Enquiry' },
         { colorCode: '#4C4AA5', enquiryText: 'Service Enquiry' },
@@ -298,7 +298,7 @@ export default Vue.extend({
         { name: 'form-js', value: 'javascript', text: 'JavaScript' },
         { name: 'form-node', value: 'node', text: 'NodeJS' },
         { name: 'form-vue', value: 'vue', text: 'VueJS' },
-        { name: 'form-serverless', value: 'serverless', text: 'ServerLess' },
+        { name: 'form-serverless', value: 'serverless', text: 'ServerLess' }
       ],
       // maintain ALL of the different form information
       form: {
@@ -526,7 +526,7 @@ export default Vue.extend({
     margin-bottom: 25px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
+    font-size: 1.5em;
   }
 
   #contact-form>form>div, #contact-form>form>div>div
