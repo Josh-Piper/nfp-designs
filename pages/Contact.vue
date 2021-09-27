@@ -78,6 +78,7 @@
               v-model.lazy="form[formData.name]"
               :type="(formData.name ==='form-phone-number') ? 'number' : 'text'"
               :name="formData.name"
+              :placeholder="formData.placeholder"
               :style="`background: ${getCorrespondingFormColor()};`"
             >
           </div>
@@ -210,6 +211,7 @@
             <textarea
               v-model="form['form-comments']"
               name="comments"
+              placeholder="Enter information regarding your query"
               :style="`background: ${getCorrespondingFormColor()};`"
             />
           </div>
@@ -267,10 +269,10 @@ export default Vue.extend({
       ],
       // relevant to all forms
       basicFormData: [
-        { text: 'Your name', name: 'form-name' },
-        { text: 'Company name', name: 'form-company-name' },
-        { text: 'Email address', name: 'form-email-address' },
-        { text: 'Phone nunber', name: 'form-phone-number' }
+        { text: 'Your name', name: 'form-name', placeholder: 'John Doe' },
+        { text: 'Company name', name: 'form-company-name', placeholder: 'Google' },
+        { text: 'Email address', name: 'form-email-address', placeholder: 'djohn@google.com' },
+        { text: 'Phone nunber', name: 'form-phone-number', placeholder: '04-john' }
       ],
       // additional form data
       additionalFormData: {
