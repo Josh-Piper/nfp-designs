@@ -16,12 +16,12 @@ export const state = () => ({
       type: 'SIT120 Info'
     },
     {
-      question: 'What is SIT120',
+      question: 'What is SIT120?',
       answer: 'Deakin University\'s unit Introduction to Responsive Web Apps which teaches the basics of programming',
       type: 'SIT120 Info'
     },
     {
-      question: 'What is NFP Designs',
+      question: 'What is NFP Designs?',
       answer: 'A non-for-profit organisation providing services to other charities requiring technical consultation',
       type: 'General Enquiries'
     },
@@ -31,12 +31,12 @@ export const state = () => ({
       type: 'General Enquiries'
     },
     {
-      question: 'How do I volunteer/help NFP Designs',
+      question: 'How do I volunteer/help NFP Designs?',
       answer: 'Please use the contact us page and select the Volunteering & Contributing button',
       type: 'General Enquiries'
     },
     {
-      question: 'What are your favourite foods',
+      question: 'What are your favourite foods?',
       answer: 'I love big breakfeasts, which includes chorizo, bread and egg. Absolute classic food',
       type: 'General Enquiries'
     }

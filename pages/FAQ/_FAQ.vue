@@ -61,6 +61,31 @@
       </div>
     </div>
 
+    <div id="submit-faq-question">
+      <div id="sub-faq-question-lhs">
+        <div id="sub-faq-question-lhs-text">
+          <span id="sub-faq-question-lhs-text-title">
+            Is your question not listed?
+          </span>
+          <span>Submit a question then!</span>
+        </div>
+        <div id="sub-faq-question-lhs-inputter">
+          <label>
+            Question:
+            <input
+              v-model="questionToSubmit"
+              type="text"
+              placeholder="Who is your favourite tutor?"
+            >
+          </label>
+        </div>
+      </div>
+      <div id="sub-faq-question-rhs">
+        <a>
+          SUBMIT
+        </a>
+      </div>
+    </div>
     <Footer class="footer-main" />
   </div>
 </template>
@@ -81,7 +106,8 @@ export default Vue.extend({
       indexesShown: [0],
       itemsToLoad: 5,
       orderedBy: 'All',
-      customSorter: ''
+      customSorter: '',
+      questionToSubmit: ''
     }
   },
   computed: {
@@ -285,6 +311,94 @@ export default Vue.extend({
     transform: rotate(180deg);
   }
 
+  #submit-faq-question
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 800px;
+    background: #282754;
+    align-self: center;
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 75px 0;
+  }
+
+  #sub-faq-question-lhs
+  {
+    background: #282754;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  #sub-faq-question-lhs-text
+  {
+    background: #282754;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sub-faq-question-lhs-text-title
+  {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  #sub-faq-question-lhs-text>span
+  {
+    background: #282754;
+    font-size: 1.25em;
+  }
+
+  #sub-faq-question-lhs-inputter
+  {
+    margin-top: 30px;
+    background: #282754;
+  }
+
+  #sub-faq-question-lhs-inputter>label
+  {
+    background: #282754;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sub-faq-question-lhs-inputter>label>input[type=text]
+  {
+    background: #C4C4C4;
+    height: 1.5em;
+    color: black;
+    width: 100%;
+  }
+
+  #sub-faq-question-rhs
+  {
+    width: 50%;
+    height: 100%;
+    background: #282754;
+    display: flex;
+    justify-content: right;
+    margin-right: 50px;
+  }
+
+  #sub-faq-question-rhs>a
+  {
+    font-size: 1.5em;
+    border-radius: 150px;
+    padding: 20px 30px;
+    background: #00838F;
+    color: white;
+    cursor: pointer;
+  }
+
+  #sub-faq-question-rhs>a:hover
+  {
+    filter: brightness(110%);
+  }
+
   @media only screen and (max-width : 1200px)
   {
     #faq-question-needs-answering
@@ -296,13 +410,24 @@ export default Vue.extend({
     {
       width: 85vw;
     }
+
+    #submit-faq-question
+    {
+      width: 80vw;
+    }
   }
 
   @media only screen and (max-width : 600px)
   {
     #faq-question-needs-answering
     {
-      width: 50vw;
+      width: 85vw;
+      padding: 15px 5px;
+    }
+
+    #faq-question-needs-answer-search-bar
+    {
+      width: 85vw;
     }
 
     #faq-sorter-wheel
@@ -319,6 +444,42 @@ export default Vue.extend({
       width: 80vw;
       height: 50px;
       font-size: 1.25em;
+    }
+
+    #submit-faq-question
+    {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #sub-faq-question-lhs-text-title
+    {
+      margin-bottom: 5px;
+    }
+
+    #sub-faq-question-lhs
+    {
+      width: 80%;
+    }
+
+     #sub-faq-question-lhs-inputter>label
+     {
+       font-size: 1.5em;
+     }
+
+    #sub-faq-question-lhs-inputter>label>input[type=text]
+    {
+      font-size: 1em;
+      height: 2em;
+    }
+
+    #sub-faq-question-rhs
+    {
+      justify-self: center;
+      width: 100%;
+      justify-content: center;
+      margin-top: 20px;
+      margin-right: 0;
     }
   }
 
