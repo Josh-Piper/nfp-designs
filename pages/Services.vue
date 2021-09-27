@@ -1,7 +1,11 @@
 <template>
   <div class="app">
     <NavigationBar :current-link="'Services'" />
-    <h1>services</h1>
+
+
+    <p class="section-header-text">Services</p>
+
+
     <Footer class="footer-main" />
   </div>
 </template>

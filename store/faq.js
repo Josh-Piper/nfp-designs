@@ -44,11 +44,11 @@ export const state = () => ({
 })
 
 export const mutations = {
-  addQuestion (state, q) {
-    if (q === '') {
+  addQuestion (state, qna) {
+    if (qna.question === '') {
       return
     }
 
-    state.faqData.push({ question: q, answer: 'TBA' })
+    state.faqData.push(qna)
   }
 }

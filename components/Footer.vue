@@ -113,6 +113,7 @@ export default Vue.extend({
     .footer-search-bar
     {
       min-height: 100px;
+      height: 100px;
     }
 
     .footer-redirect-links

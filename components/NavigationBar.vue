@@ -32,7 +32,7 @@
             :key="index"
           >
             <NuxtLink
-              :to="getRouteLink(link)"
+              :to="`/${getRouteLink(link)}`"
               :class="activeLink(link) && 'bold'"
             >
               {{ link }}
@@ -67,7 +67,7 @@ export default Vue.extend({
   methods: {
     getRouteLink (link: string): string {
       if (link === 'About') {
-        return '/'
+        return ''
       }
       return link.toLowerCase()
     },

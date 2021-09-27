@@ -2,7 +2,7 @@
   <div class="app">
     <NavigationBar :current-link="'FAQ'" />
 
-    <!-- Custom search bar -->
+    <!-- Search bar used to filter the current FAQ question -->
     <div id="faq-question-needs-answering">
       <div id="faq-question-needs-answer-text">
         Have a question that needs answering?
@@ -26,8 +26,13 @@
       </label>
     </div>
 
+    <!-- FAQ accordian -->
     <div id="accordian">
+
+      <!-- FAQ question and answer container div -->
       <div id="accordian-questions">
+
+        <!-- Draw the question with the drop down image -->
         <div
           v-for="(item, index) in getQuestionAndAnswers"
           :key="index"
@@ -42,6 +47,7 @@
             >
           </div>
 
+          <!-- If the current index is clicked, then draw the answer -->
           <div v-show="isDisplayed(index)" class="accordian-answer">
             {{ item.answer }}
           </div>
@@ -50,10 +56,12 @@
         </div>
       </div>
 
+      <!-- Error message to let the user know that there were no results -->
       <p v-show="isQuestionsAndAnswersEmpty">
         No results found
       </p>
 
+      <!-- Accordian load more button -->
       <div id="accordian-footer">
         <a @click="loadMore">
           Load More Questions
@@ -61,7 +69,10 @@
       </div>
     </div>
 
+    <!-- Submit a new FAQ question via. the Vuex store -->
     <div id="submit-faq-question">
+
+      <!-- The FAQ submission text and input -->
       <div id="sub-faq-question-lhs">
         <div id="sub-faq-question-lhs-text">
           <span id="sub-faq-question-lhs-text-title">
@@ -80,8 +91,10 @@
           </label>
         </div>
       </div>
+
+      <!-- Submit button -->
       <div id="sub-faq-question-rhs">
-        <a>
+        <a @click="submitQuestion">
           SUBMIT
         </a>
       </div>
@@ -92,8 +105,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
+// layout of the Question and Answers
 interface QuestionAndAnswer {
   question: string,
   answer: string,
@@ -107,11 +121,13 @@ export default Vue.extend({
       itemsToLoad: 5,
       orderedBy: 'All',
       customSorter: '',
-      questionToSubmit: ''
+      questionToSubmit: '',
+      hasSubmittedQuestion: false
     }
   },
   computed: {
     ...mapState('faq', ['faqData']),
+    // Constantly get the newest data that the user wishes to use.
     getQuestionAndAnswers (): QuestionAndAnswer[] {
       let result: QuestionAndAnswer[] = this.faqData
 
@@ -123,6 +139,7 @@ export default Vue.extend({
         result = result.filter(qna => qna.type === this.orderedBy)
       }
 
+      // Only return the amount of items wanted, i.e. load more questions button
       if (result.length >= this.itemsToLoad) {
         return result.slice(0, this.itemsToLoad)
       } else {
@@ -134,12 +151,16 @@ export default Vue.extend({
     }
   },
   watch: {
+    // Check for changes if the FAQ ordering is changed. Reset indexes
+    // to prevent an issues
     orderedBy (oldValue, newValue) {
       if (oldValue !== newValue) {
         this.indexesShown = []
       }
     }
   },
+  // The searching method is currently hooked into the route
+  // should be changed into search queries ?=
   mounted () {
     const sorter = this.$route.params.FAQ
     if (sorter) {
@@ -149,6 +170,7 @@ export default Vue.extend({
     this.indexesShown = []
   },
   methods: {
+    ...mapMutations('faq', ['addQuestion']),
     loadMore (): void {
       this.itemsToLoad += 5
     },
@@ -167,12 +189,28 @@ export default Vue.extend({
     },
     isDisplayed (index: number): boolean {
       return this.indexesShown.includes(index)
+    },
+    submitQuestion (): void {
+      if (this.questionToSubmit === '') {
+        return
+      }
+
+      const submission: QuestionAndAnswer = {
+        question: this.questionToSubmit,
+        answer: 'Waiting for response...',
+        type: 'General Enquiries'
+      }
+
+      this.addQuestion(submission)
+      this.hasSubmittedQuestion = true
+      this.questionToSubmit = ''
     }
   }
 })
 </script>
 
 <style>
+  /* Searching component, relies on using the searching component */
   #faq-question-needs-answering
   {
     background: #195748;
@@ -204,6 +242,7 @@ export default Vue.extend({
     margin-bottom: 25px;
   }
 
+  /* FAQ sorting styling */
   #faq-sorter-wheel
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -214,6 +253,10 @@ export default Vue.extend({
     align-self: center;
   }
 
+  /*
+    Make the select wheel bigger, needs to be refactored for a custom drop down
+    arrow
+  */
   #faq-sorter-wheel>label>select
   {
     width: 150px;
@@ -222,8 +265,10 @@ export default Vue.extend({
     font-weight: 700;
   }
 
+  /* Styling for the FAQ accordian, i.e. actual questions */
   #accordian
   {
+    padding-top: 30px;
     margin: 50px 0;
     background: #C4C4C4;
     align-self: center;
@@ -231,6 +276,7 @@ export default Vue.extend({
     width: 800px;
   }
 
+  /* Error message styling for when no FAQ's are applicable */
   #accordian>p
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -244,6 +290,7 @@ export default Vue.extend({
     margin-top: 5px;
   }
 
+  /* The Question and Answer's are linked together */
   .accordian-qna-container
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -251,6 +298,10 @@ export default Vue.extend({
     padding: 0 20px;
   }
 
+  /*
+    The accordian question contains the question and
+    dropdown image. Thus, required styling and flexbox for layout
+  */
   .accordian-question
   {
     display: flex;
@@ -274,6 +325,7 @@ export default Vue.extend({
     height: 20px;
   }
 
+  /* Set the accordian answer text to be smaller than the question */
   .accordian-answer
   {
     background: #C4C4C4;
@@ -286,6 +338,7 @@ export default Vue.extend({
     padding: 0.5px 0;
   }
 
+  /* Accordian footer styling to load more questions */
   #accordian-footer
   {
     align-self: center;
@@ -304,13 +357,16 @@ export default Vue.extend({
     padding: 10px;
     background: #282754;
     color: white;
+    cursor: pointer;
   }
 
+  /* Rotate the drop down arrow when showing answer */
   .flip
   {
     transform: rotate(180deg);
   }
 
+  /* Submit FAQ question styling */
   #submit-faq-question
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -326,6 +382,10 @@ export default Vue.extend({
     margin: 75px 0;
   }
 
+  /*
+    LHS is all text and input besides the submit button for the
+    submit FAQ question section
+  */
   #sub-faq-question-lhs
   {
     background: #282754;
@@ -347,6 +407,7 @@ export default Vue.extend({
     text-decoration: underline;
   }
 
+  /* Text is located inside the span, set background */
   #sub-faq-question-lhs-text>span
   {
     background: #282754;
@@ -366,10 +427,11 @@ export default Vue.extend({
     flex-direction: column;
   }
 
+  /* Question input box styling, making it larger for responsiveness */
   #sub-faq-question-lhs-inputter>label>input[type=text]
   {
     background: #C4C4C4;
-    height: 1.5em;
+    height: 2em;
     color: black;
     width: 100%;
   }
@@ -384,6 +446,7 @@ export default Vue.extend({
     margin-right: 50px;
   }
 
+  /* Submit question button styling */
   #sub-faq-question-rhs>a
   {
     font-size: 1.5em;
@@ -399,6 +462,11 @@ export default Vue.extend({
     filter: brightness(110%);
   }
 
+  /*
+    Set the width's to be dependent on screen screen.
+    This is done as 4k screens and higher should have more
+    spacing instead of being larger
+  */
   @media only screen and (max-width : 1200px)
   {
     #faq-question-needs-answering
@@ -417,6 +485,7 @@ export default Vue.extend({
     }
   }
 
+  /* Phone responsive layout */
   @media only screen and (max-width : 600px)
   {
     #faq-question-needs-answering
@@ -430,6 +499,7 @@ export default Vue.extend({
       width: 85vw;
     }
 
+    /* Make the FAQ sorter wheel larger for a phone */
     #faq-sorter-wheel
     {
       font-size: 1.25em;
@@ -438,6 +508,13 @@ export default Vue.extend({
       width: 100vw;
     }
 
+    #accordian-footer>a
+    {
+
+      font-size: 0.75em;
+    }
+
+    /* Size for the select accordian sorting feature */
     #faq-sorter-wheel>label>select
     {
       margin-top: 20px;
@@ -457,6 +534,7 @@ export default Vue.extend({
       margin-bottom: 5px;
     }
 
+    /* Change the size of text for the upload question */
     #sub-faq-question-lhs
     {
       width: 80%;
@@ -473,6 +551,7 @@ export default Vue.extend({
       height: 2em;
     }
 
+    /* Center the button in a container format */
     #sub-faq-question-rhs
     {
       justify-self: center;
