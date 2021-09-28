@@ -2,13 +2,20 @@
   <div class="app">
     <NavigationBar :current-link="'Services'" />
 
+    <!--
+      Only visible when viewing a specific service.
+      This is done by using a route i.e. /web&20development
+    -->
     <div v-if="this.specificService" class="popup-box">
       <div class="popup-box-title">
+
+        <!-- Exit button to go back a page -->
         <img
           src="~@/assets/cross_icon_logo.png"
           alt="cross"
           @click="gotoServices"
         >
+
         {{ specificService.serviceName }}
       </div>
       <div class="popup-box-description">
@@ -16,8 +23,13 @@
       </div>
     </div>
 
-    <!-- -->
+    <!--
+      The whole content is warpped in a div to overlay a color
+      when viewing a specific service in desktop mode.
+    -->
     <div :id="specificService && 'blackout'" class="main-content">
+
+      <!-- Page Header -->
       <p
         class="section-header-text"
         :class="specificService && 'blackout'"
@@ -26,7 +38,6 @@
       </p>
 
       <!-- Draw the coloured squares to differentiate between services -->
-      <!-- Standard Services -->
       <div
         id="services-example-box"
         :class="specificService && 'blackout'"
@@ -35,11 +46,13 @@
           id="services-example-box-standard"
           :class="specificService && 'blackout'"
         >
+          <!-- White squared box with its associated text -->
           <span
             class="square-box"
             :style="!specificService && 'background: white;'"
             :class="specificService && 'blackout'"
           >
+            <!-- Not breaking white-space &nbsp -->
             &nbsp;
           </span>
           <span
@@ -50,7 +63,7 @@
           </span>
         </div>
 
-        <!-- Premium Services -->
+        <!-- Premium Service Box -->
         <div
           :id="specificService && 'blackout'"
           class="services-example-box-premium"
@@ -71,8 +84,13 @@
         </div>
       </div>
 
-      <!-- -->
+      <!-- Display the actual services in a grid format -->
       <div :id="specificService && 'blackout'" class="standard-service-container">
+
+        <!--
+          Appearance of the service container box
+          Clickable for redirect to specific service
+        -->
         <div
           v-for="(item, index) in standardServices"
           :id="specificService && 'blackout'"
@@ -92,7 +110,7 @@
         </div>
       </div>
 
-      <!-- -->
+      <!-- Display the premium services -->
       <div :id="specificService && 'blackout'" class="premium-service-container">
         <div
           v-for="(item, index) in preiumiumServices"
@@ -145,6 +163,7 @@ export default Vue.extend({
     ...mapState('services', ['standardServices', 'preiumiumServices'])
   },
   mounted () {
+    // If a route is parsed in, then display its details if it exists
     const findService: string = this.$route.params.Services
     if (!findService) {
       return
@@ -156,7 +175,7 @@ export default Vue.extend({
   },
   methods: {
     // Relative paths are binded at compile time.
-    // This is a workaround to the v-bind image source
+    // This is a workaround to the v-bind img>src
     getImageSource (src: string): string {
       return require(`../../assets/${src}`)
     },
@@ -177,6 +196,11 @@ export default Vue.extend({
 
 <style scoped>
 
+  /*
+    Popup box is only visible when a specific service has
+    been passed into the route. This is the layout of the
+    popup box itself.
+  */
   .popup-box
   {
     background: #282754;
@@ -211,6 +235,7 @@ export default Vue.extend({
     color: white;
   }
 
+  /* Exit button for the popup box */
   .popup-box-title>img
   {
     top: -35px;
@@ -224,6 +249,10 @@ export default Vue.extend({
     cursor: pointer;
   }
 
+  /*
+    The Vuex files have \n linebreaks, thus,
+    read white-space and format the description.
+  */
   .popup-box-description::first-line
   {
     line-height: 0px;
@@ -239,12 +268,14 @@ export default Vue.extend({
     white-space: pre-line;
   }
 
+  /* When a specific service is selectted, then blackout screen */
   #blackout, .blackout
   {
     background-image: url('~@/assets/services-background.png');
     background-repeat: repeat;
   }
 
+  /* Global settings */
   .main-content
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -252,6 +283,7 @@ export default Vue.extend({
     flex-direction: column;
   }
 
+  /* Styling for the first content on the page */
   #services-example-box
   {
     width: 100%;
@@ -272,6 +304,7 @@ export default Vue.extend({
     margin: 0 20px;
   }
 
+  /* Styling of the square boxes for the service examples */
   .square-box
   {
     width: 50px;
@@ -286,6 +319,7 @@ export default Vue.extend({
     font-weight: 600;
   }
 
+  /* Formattiing for the grid layouts of services */
   .standard-service-container, .premium-service-container
   {
     margin-top: 50px;
@@ -304,6 +338,7 @@ export default Vue.extend({
     grid-template-columns: repeat(3, 1fr);
   }
 
+  /* Appearance of the individual services */
   .service-box-grid-appearance
   {
     justify-self: center;
@@ -359,10 +394,16 @@ export default Vue.extend({
       height: 250px;
     }
 
+    /* Make the images not stretch to a bigger ratio */
     .service-box-grid-appearance>img
     {
       object-fit: fill;
       height: 150px;
+    }
+
+    .getting-started
+    {
+      margin-top: 100px;
     }
   }
 
@@ -376,6 +417,7 @@ export default Vue.extend({
       display: none;
     }
 
+    /* Mae the popup box relative to the screen size */
     .popup-box
     {
       position: relative;
@@ -390,6 +432,10 @@ export default Vue.extend({
       height: 75px;
     }
 
+    /*
+      Move the location and picture of the exit icon.
+      More mobile friendly as a left facing arrow
+    */
     .popup-box-title>img
     {
       content: url('~@/assets/purple-back.png');

@@ -245,6 +245,12 @@ export default Vue.extend({
     height: 100%;
   }
 
+  .portfolio-image:hover
+  {
+    width: 99%;
+    height: 99%;
+  }
+
   .portfolio-button
   {
     margin-top: 15px;
@@ -254,6 +260,11 @@ export default Vue.extend({
     font-size: 1.15em;
     padding: 0 25px;
     border-radius: 25px;
+  }
+
+  .portfolio-button:hover
+  {
+    filter: brightness(110%);
   }
 
   /* Set the  container for the getting started component */

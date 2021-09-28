@@ -77,6 +77,11 @@
     text-decoration: none;
   }
 
+  .get-started-button a:hover
+  {
+    filter: brightness(110%);
+  }
+
   /* Update responsiveness by changing row to column layout */
 
   @media only screen and (max-width : 950px)
