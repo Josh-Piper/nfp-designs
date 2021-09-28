@@ -4,7 +4,9 @@
 
     <!-- All details are drawn from a JSON file to represent APIs for the front-end -->
     <!-- NFP Designs main services -->
-    <p class="section-header-text">Wanting to get started quickly? Choose your Required Need!</p>
+    <p class="section-header-text">
+      Wanting to get started quickly? Choose your Required Need!
+    </p>
     <div id="about-hero">
       <div v-for="(item, index) in heroContent" :key="index">
         <HeroAdvert
@@ -17,7 +19,9 @@
     </div>
 
     <!-- NFP Designs Explanations -->
-    <p class="section-header-text">What is NFP Designs and how does it work?</p>
+    <p class="section-header-text">
+      What is NFP Designs and how does it work?
+    </p>
     <div id="about-nfp-descriptions">
       <div v-for="(item, index) in servicesAndExplanations" :key="index" class="about-nfp-descriptions-container">
         <div class="about-nfp-descriptions-title" :style="`background: ${getColorForExplanation(item.title)}`">
@@ -33,16 +37,29 @@
     <p class="section-header-text">Portfolio</p>
     <div id="portfolio-description-container">
       <div id="portfolio-description">
-        The design and functionality of a website is combined. Combing these two user experiences has proven to be effective. Allow your ideas come to fruition while also allowing the users to enjoy an elegant interaction. Ultimately connecting NFP organisations with the designs and functionality required to allow their work to be reached!
+        The design and functionality of a website is combined. Combing these
+        two user experiences has proven to be effective. Allow your ideas come
+        to fruition while also allowing the users to enjoy an elegant interaction.
+        Ultimately connecting NFP organisations with the designs and functionality
+        required to allow their work to be reached!
       </div>
     </div>
     <div class="center-mid">
       <div id="portfolio-wrapper-container">
         <div v-for="(item, index) in portfolio" :key="index" class="portfolio-item">
           <a target="_blank" :href="`${item.descriptionRedirect}`" style="margin-bottom: 15px;">
-            <img :src="item.imageSrc" :alt="item.imageAlt" class="portfolio-image" :style="`border: solid 7px ${applyBorder(index)}`" />
+            <img
+              :src="item.imageSrc"
+              :alt="item.imageAlt"
+              class="portfolio-image"
+              :style="`border: solid 7px ${applyBorder(index)}`"
+            >
           </a>
-          <a target="_blank" :href="`${item.descriptionRedirect}`" class="portfolio-button">{{ item.description }}</a>
+          <a
+            target="_blank"
+            :href="`${item.descriptionRedirect}`"
+            class="portfolio-button">{{ item.description }}
+          </a>
         </div>
       </div>
     </div>

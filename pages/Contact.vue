@@ -36,8 +36,8 @@
         <a
           v-for="(item, index) in contactButtons"
           :key="index"
-          @click="updateEnquiryText(item.enquiryText)"
           :style="`background: ${item.colorCode};`"
+          @click="updateEnquiryText(item.enquiryText)"
         >
           {{ item.enquiryText }}
         </a>
@@ -52,8 +52,8 @@
     <div v-show="enquirySelect !== ''">
       <div id="contact-form">
         <form
-          @submit.prevent="submitContact"
           :style="`background: ${getCorrespondingFormColor()};`"
+          @submit.prevent="submitContact"
         >
           <!-- Global form data related to all forms, i.e. email, comments etc -->
           <div
@@ -89,7 +89,6 @@
             :key="index"
             :style="`background: ${getCorrespondingFormColor()};`"
           >
-
             <label
               :for="formData.name"
               :style="`background: ${getCorrespondingFormColor()};`"
@@ -106,13 +105,12 @@
               :style="`background: ${getCorrespondingFormColor()};`"
             >
               <select
+                v-model.lazy="form[formData.name]"
                 :type="formData.type"
                 :name="formData.name"
-                v-model.lazy="form[formData.name]"
                 :style="`background: ${getCorrespondingFormColor()};`"
               >
-
-              <!-- Draw all the basic services for the service enquiry -->
+                <!-- Draw all the basic services for the service enquiry -->
                 <option
                   v-for="(service, idx) in standardServices"
                   :key="idx"
@@ -140,9 +138,9 @@
               :style="`background: ${getCorrespondingFormColor()};`"
             >
               <select
+                v-model.lazy="form[formData.name]"
                 :type="formData.type"
                 :name="formData.name"
-                v-model.lazy="form[formData.name]"
                 :style="`background: ${getCorrespondingFormColor()};`"
               >
                 <option
@@ -250,8 +248,8 @@
             :style="`background: ${getCorrespondingFormColor()};`"
           >
             <button
-              @click="submitContact"
               :style="`background: ${getCorrespondingFormColor()};`"
+              @click="submitContact"
             >
               Submit
             </button>

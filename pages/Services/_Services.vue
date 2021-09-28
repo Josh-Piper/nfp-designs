@@ -8,7 +8,6 @@
     -->
     <div v-if="this.specificService" class="popup-box">
       <div class="popup-box-title">
-
         <!-- Exit button to go back a page -->
         <img
           src="~@/assets/cross_icon_logo.png"
@@ -28,7 +27,6 @@
       when viewing a specific service in desktop mode.
     -->
     <div :id="specificService && 'blackout'" class="main-content">
-
       <!-- Page Header -->
       <p
         class="section-header-text"
@@ -86,7 +84,6 @@
 
       <!-- Display the actual services in a grid format -->
       <div :id="specificService && 'blackout'" class="standard-service-container">
-
         <!--
           Appearance of the service container box
           Clickable for redirect to specific service

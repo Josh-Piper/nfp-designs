@@ -1,7 +1,12 @@
 <template>
   <div class="mailing-list-container">
+    <!--
+      Contains all content on the left hand side.
+      i.e. everything besides the join mailing list button
+    -->
     <div class="mailing-list-lhs">
       <div class="mailing-list-text">
+
         <span class="mailing-list-text-title">
           Interested in our blog?
         </span>
@@ -10,6 +15,7 @@
           join the mail list!
         </span>
       </div>
+      <!-- Form input for email -->
       <label class="join-email-input">
         Email:
         <input
@@ -18,6 +24,8 @@
           placeholder="shiva-porkel@deakin.edu.au"
         >
       </label>
+
+      <!-- When the user submits the form, let them know it was successful -->
       <p
         v-show="isSubmitted"
         style="background: #195748; color: #028FBC;"
@@ -25,6 +33,8 @@
         Joined email list successfully
       </p>
     </div>
+
+    <!-- Join mailing list button -->
     <a class="mailing-join-button" @click="joinMailingList">
       JOIN
     </a>
@@ -67,6 +77,7 @@ export default Vue.extend({
     padding: 20px;
   }
 
+  /* All content on left hand side for desktop view. */
   .mailing-list-lhs
   {
     background: #195748;
@@ -75,6 +86,10 @@ export default Vue.extend({
     justify-content: space-between;
   }
 
+  /*
+    The button is placed first to make it easier in mobile view to set
+    it via column-reverse using flexbox
+  */
   .mailing-join-button
   {
     align-self: center;
@@ -97,6 +112,7 @@ export default Vue.extend({
     box-shadow: 0 0 30 #229B53;
   }
 
+  /* Set mailing list text */
   .mailing-list-text
   {
     background: #195748;
@@ -119,6 +135,7 @@ export default Vue.extend({
     font-size: 1.25em;
   }
 
+  /* Make the input the whole width so its label is block formatted */
   .join-email-input
   {
     margin-top: 50px;
@@ -135,9 +152,10 @@ export default Vue.extend({
     font-size: 1.25em;
   }
 
-  /* Navigation bar appearance from phones */
+  /* Appearance for phones */
   @media only screen and (max-width : 600px)
   {
+    /* Change to column formatting */
     .mailing-list-container
     {
       flex-direction: column;

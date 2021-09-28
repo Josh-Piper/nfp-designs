@@ -2,32 +2,36 @@
   <div class="app">
     <NavigationBar :current-link="'Blog'" />
 
-    <!-- -->
+    <!--
+      Blog hero consists of most viewed article and links to the different categories
+    -->
     <div id="blog-hero">
 
-      <!-- -->
+      <!-- Draw the different blog sorting methods, i.e. the different categories -->
       <div id="blog-hero-buttons-container">
         <a
           v-for="(category, index) in allCategories"
           :key="index"
+          @click="setSort(category)"
         >
           {{ category }}
         </a>
       </div>
 
-      <!-- -->
+      <!-- The blog hero displays the most viewed blog post -->
       <div id="most-viewed-blog-post">
+
+        <!-- Blog image located on the hero-->
         <img
           :src="mostViewedPost.imageSrc"
           :alt="`image for ${mostViewedPost.title}`"
         >
-        <!-- -->
+        <!-- Blog details -->
         <div id="most-viewed-blog-post-text">
           <div id="most-viewed-blog-post-text-title">
             {{ mostViewedPost.title }}
           </div>
 
-          <!-- -->
           <div id="most-viewed-blog-post-text-description">
             {{ mostViewedPost.date }}
             <span id="dot">
@@ -36,7 +40,8 @@
             {{ mostViewedPost.minuteReadTime }}
             min read
           </div>
-          <!-- -->
+
+          <!-- Hero learn more button -->
           <a
             id="most-viewed-blog-post-button"
             @click="sendToBlog(mostViewedPost.title)"
@@ -47,15 +52,19 @@
       </div>
     </div>
 
-    <!-- -->
-    <p class="section-header-text">Blog Posts</p>
+    <!-- The blog posts in grid fashion -->
+    <p class="section-header-text">
+      Blog Posts
+    </p>
     <div id="blog-posts-container">
+      <!-- Get the sorted blog posts -->
       <div
-        v-for="(post, index) in blogPosts"
+        v-for="(post, index) in getSortedBlogPosts"
         :key="index"
         class="blog-post"
         @click="sendToBlog(post.title)"
       >
+        <!-- Draw the blog details -->
         <img
           :src="post.imageSrc"
           :alt="post.title + ' image'"
@@ -69,7 +78,7 @@
             {{ post.title }}
           </div>
 
-          <!-- -->
+          <!-- Blog post descriptions -->
           <div class="blog-post-description">
             {{ post.date }}
             <span id="dot" style="background: black;">
@@ -79,11 +88,10 @@
             min read
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- -->
+    <!-- Center the mailing component -->
     <div id="mailing">
       <MailingList />
     </div>
@@ -108,8 +116,20 @@ interface BlogPost {
 }
 
 export default Vue.extend({
+  data () {
+    return {
+      sortBy: 'All' as string
+    }
+  },
   computed: {
     ...mapState('blog', ['blogPosts']),
+    getSortedBlogPosts (): BlogPost[] {
+      const allPosts: BlogPost[] = this.blogPosts
+      if (this.sortBy === 'All') {
+        return allPosts
+      }
+      return allPosts.filter(post => post.category === this.sortBy)
+    },
     mostViewedPost (): BlogPost {
       const allPosts: BlogPost[] = this.blogPosts
       const mostViewedPost = allPosts.reduce((lhs, rhs) => {
@@ -121,12 +141,19 @@ export default Vue.extend({
       const allPosts: BlogPost[] = this.blogPosts
       const allCategories: string[] = allPosts.map(post => post.category)
       const uniqueCategories = [...new Set(allCategories)]
-      return uniqueCategories
+      return ['All', ...uniqueCategories]
     }
   },
   methods: {
     sendToBlog (blogTitle: string): void {
       this.$router.push({ path: `/blog/${blogTitle}` })
+    },
+    setSort (category: string): void {
+      if (this.sortBy === category) {
+        return
+      }
+
+      this.sortBy = category
     }
   }
 })
@@ -134,6 +161,7 @@ export default Vue.extend({
 
 <style scoped>
 
+  /* Format the blog hero as a 100% width bar */
   #blog-hero
   {
     font-family: Arial, Helvetica, sans-serif;
@@ -150,6 +178,7 @@ export default Vue.extend({
     margin-top: 30px;
   }
 
+  /* Styling for category buttons (used for sorting the blog posts) */
   #blog-hero-buttons-container>a
   {
     background: #494949;
@@ -162,6 +191,7 @@ export default Vue.extend({
     text-decoration: underline;
   }
 
+  /* Appearance of the hero blog post example (most viewed post) */
   #most-viewed-blog-post
   {
     background: #494949;
@@ -172,12 +202,14 @@ export default Vue.extend({
     padding: 0 20px;
   }
 
+  /* Static dimensions set to allow for adequate spacing for large screens */
   #most-viewed-blog-post>img
   {
     width: 700px;
     height: 400px;
   }
 
+  /* Formatting for hero blog post text */
   #most-viewed-blog-post-text
   {
     background: #494949;
@@ -204,6 +236,7 @@ export default Vue.extend({
     margin-bottom: 50px;
   }
 
+  /* The dot is used to seperate the date of a blog post and time to read the post */
   #dot
   {
     height: 10px;
@@ -234,6 +267,7 @@ export default Vue.extend({
     filter: brightness(110%);
   }
 
+  /* Formatting for all blog posts */
   #blog-posts-container
   {
     align-self: center;
@@ -247,6 +281,10 @@ export default Vue.extend({
     align-items: center;
   }
 
+  /*
+    Styling for individual blog post. Hide all content to format
+    the image properly
+  */
   .blog-post
   {
     width: 350px;
@@ -284,6 +322,7 @@ export default Vue.extend({
     margin: 0 10px;
   }
 
+  /* Move the blog post category next to the image */
   .blog-post-category
   {
     height: auto;
@@ -298,6 +337,7 @@ export default Vue.extend({
     text-align: center;
   }
 
+  /* Blog post image formatting for other device responsiveness */
   .blog-post-information
   {
     display: flex;
@@ -305,6 +345,7 @@ export default Vue.extend({
     justify-content: center;
   }
 
+  /* Blog post description formatting */
   .blog-post-title
   {
     font-weight: bold;
@@ -329,6 +370,10 @@ export default Vue.extend({
     margin-bottom: 100px;
   }
 
+  /*
+    Make the content dependent on the side width,
+    this is changed since the screens are now for small desktops and tablets
+  */
   @media only screen and (max-width : 1200px)
   {
     #blog-posts-container
@@ -336,11 +381,11 @@ export default Vue.extend({
       grid-template-columns: repeat(2, 1fr);
     }
 
-     #most-viewed-blog-post>img
-     {
-       width: 45vw;
-       height: 25vh;
-     }
+    #most-viewed-blog-post>img
+    {
+      width: 45vw;
+      height: 25vh;
+    }
 
     #most-viewed-blog-post-text
     {
@@ -362,7 +407,7 @@ export default Vue.extend({
   /* Mobile layout */
   @media only screen and (max-width : 600px)
   {
-
+    /* Hero formatting, makes everything in a column layout */
     #blog-hero-buttons-container
     {
       font-size: 1.5em;
@@ -382,13 +427,19 @@ export default Vue.extend({
     #most-viewed-blog-post>img,
     #most-viewed-blog-post-text
     {
-      width: 80vw;
+      width: 90vw;
       margin-top: 20px;
     }
 
     #most-viewed-blog-post-text
     {
       align-items: center;
+      text-align: center;
+    }
+
+    #most-viewed-blog-post-text-title
+    {
+      margin-bottom: 10px;
     }
 
     #most-viewed-blog-post-button
@@ -396,6 +447,7 @@ export default Vue.extend({
       align-self: center;
     }
 
+    /* Blog post formatting */
     #blog-posts-container
     {
       grid-template-columns: 1fr;

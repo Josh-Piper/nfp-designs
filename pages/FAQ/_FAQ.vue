@@ -13,7 +13,9 @@
     </div>
 
     <!-- FAQ sorter wheel -->
-    <p class="section-header-text">Frequently Asked Questions (FAQ)</p>
+    <p class="section-header-text">
+      Frequently Asked Questions (FAQ)
+    </p>
     <div id="faq-sorter-wheel">
       <label id="faq-sorter-wheel-label">
         Currently ordering by:
@@ -31,7 +33,6 @@
 
       <!-- FAQ question and answer container div -->
       <div id="accordian-questions">
-
         <!-- Draw the question with the drop down image -->
         <div
           v-for="(item, index) in getQuestionAndAnswers"
@@ -51,8 +52,7 @@
           <div v-show="isDisplayed(index)" class="accordian-answer">
             {{ item.answer }}
           </div>
-
-          <hr/>
+          <hr>
         </div>
       </div>
 
@@ -71,7 +71,6 @@
 
     <!-- Submit a new FAQ question via. the Vuex store -->
     <div id="submit-faq-question">
-
       <!-- The FAQ submission text and input -->
       <div id="sub-faq-question-lhs">
         <div id="sub-faq-question-lhs-text">
