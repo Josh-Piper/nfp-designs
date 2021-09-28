@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-str */
 export const state = () => ({
   faqData: [
     {
@@ -17,12 +18,15 @@ export const state = () => ({
     },
     {
       question: 'What is SIT120?',
-      answer: 'Deakin University\'s unit Introduction to Responsive Web Apps which teaches the basics of programming',
+      answer: 'Deakin University\'s unit Introduction to \
+      Responsive Web Apps which teaches the basics of \
+      programming',
       type: 'SIT120 Info'
     },
     {
       question: 'What is NFP Designs?',
-      answer: 'A non-for-profit organisation providing services to other charities requiring technical consultation',
+      answer: 'A non-for-profit organisation providing services \
+      to other charities requiring technical consultation',
       type: 'General Enquiries'
     },
     {
@@ -32,12 +36,14 @@ export const state = () => ({
     },
     {
       question: 'How do I volunteer/help NFP Designs?',
-      answer: 'Please use the contact us page and select the Volunteering & Contributing button',
+      answer: 'Please use the contact us page and select the \
+      Volunteering & Contributing button',
       type: 'General Enquiries'
     },
     {
       question: 'What are your favourite foods?',
-      answer: 'I love big breakfeasts, which includes chorizo, bread and egg. Absolute classic food',
+      answer: 'I love big breakfeasts, which includes chorizo, \
+      bread and egg. Absolute classic food',
       type: 'General Enquiries'
     }
   ]

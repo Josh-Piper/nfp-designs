@@ -103,17 +103,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-
-interface BlogPost {
-  title: string,
-  date: string,
-  imageSrc: string,
-  category: string,
-  minuteReadTime: number,
-  views: number,
-  content: string,
-  comments: string[]
-}
+import { BlogPost } from '~/Types/types'
 
 export default Vue.extend({
   data () {

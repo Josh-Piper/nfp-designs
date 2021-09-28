@@ -106,13 +106,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
-
-// layout of the Question and Answers
-interface QuestionAndAnswer {
-  question: string,
-  answer: string,
-  type: string
-}
+import { QuestionAndAnswer } from '~/Types/types'
 
 export default Vue.extend({
   data () {

@@ -34,7 +34,9 @@
     </div>
 
     <!-- NFP Design Portfolio -->
-    <p class="section-header-text">Portfolio</p>
+    <p class="section-header-text">
+      Portfolio
+    </p>
     <div id="portfolio-description-container">
       <div id="portfolio-description">
         The design and functionality of a website is combined. Combing these

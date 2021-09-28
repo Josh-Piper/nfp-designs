@@ -143,12 +143,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import GetImageSourceLocally from '../../mixins/GetImageSourceLocally.js'
+import { Service } from '../../Types/types'
 
-interface Service {
-  serviceName: string,
-  imageSrc: string,
-  description: string
-}
+Vue.mixin(GetImageSourceLocally)
 
 export default Vue.extend({
   data () {
@@ -171,11 +169,6 @@ export default Vue.extend({
     this.specificService = parsedService
   },
   methods: {
-    // Relative paths are binded at compile time.
-    // This is a workaround to the v-bind img>src
-    getImageSource (src: string): string {
-      return require(`../../assets/${src}`)
-    },
     openDetails (serviceName: string): void {
       // Prevent user from embedding clicked service when viewing a specific one
       if (this.specificService) {

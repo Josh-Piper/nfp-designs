@@ -3,12 +3,14 @@
     <NavigationBar :current-link="'Contact'" />
 
     <!-- Basic contact us information with Google Maps API -->
-    <p class="section-header-text">Contact Us</p>
+    <p class="section-header-text">
+      Contact Us
+    </p>
     <div id="contact-us-details-container">
       <div id="google-maps-api-container">
         <iframe
-          title="NFP Designs location Google Maps"
           id="google-maps-api"
+          title="NFP Designs location Google Maps"
           src="https://tinyurl.com/DeakinSparkMelbLocation"
           allowfullscreen=""
           loading="lazy"
@@ -29,7 +31,9 @@
     </div>
 
     <!-- Contact form buttons, allows showing the actual form -->
-    <p class="section-header-text">Select Your Reason for Contact Us</p>
+    <p class="section-header-text">
+      Select Your Reason for Contact Us
+    </p>
     <div id="reason-for-contacting">
       <!-- Create each button -->
       <div id="reason-for-contacting-buttons">
@@ -265,34 +269,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-
-interface WebDevSkill {
-  name: string,
-  value: string,
-  text: string
-}
-
-interface CompletedForm {
-  'form-name': string,
-  'form-company-name': string,
-  'form-email-address': string,
-  'form-phone-nunber': string,
-  'form-comments': string,
-  'form-job-role': string,
-  'form-service-type': string,
-  'form-web-skills': string[]
-}
-
-interface ContactButton {
-  colorCode: string,
-  enquiryText: string
-}
-
-interface BasicFormData {
-  text: string,
-  name: string,
-  placeholder: string
-}
+import { WebDevSkill, CompletedForm, ContactButton, BasicFormData } from '~/Types/types'
 
 export default Vue.extend({
   data () {
