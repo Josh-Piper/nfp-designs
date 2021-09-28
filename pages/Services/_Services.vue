@@ -3,7 +3,6 @@
     <NavigationBar :current-link="'Services'" />
 
     <div v-if="this.specificService" class="popup-box">
-
       <div class="popup-box-title">
         <img
           src="~@/assets/cross_icon_logo.png"
@@ -79,6 +78,7 @@
           :id="specificService && 'blackout'"
           :key="index"
           class="service-box-grid-appearance"
+          :class="!specificService && 'service-box-grid-appearance-hover'"
           @click="openDetails(item.serviceName)"
         >
           <img
@@ -99,6 +99,7 @@
           :id="specificService && 'blackout'"
           :key="index"
           class="service-box-grid-appearance"
+          :class="!specificService && 'service-box-grid-appearance-hover'"
           :style="!specificService && 'background: #509483;'"
           @click="openDetails(item.serviceName)"
         >
@@ -160,6 +161,11 @@ export default Vue.extend({
       return require(`../../assets/${src}`)
     },
     openDetails (serviceName: string): void {
+      // Prevent user from embedding clicked service when viewing a specific one
+      if (this.specificService) {
+        return
+      }
+
       this.$router.push({ path: `/services/${serviceName}` })
     },
     gotoServices (): void {
@@ -218,6 +224,11 @@ export default Vue.extend({
     cursor: pointer;
   }
 
+  .popup-box-description::first-line
+  {
+    line-height: 0px;
+  }
+
   .popup-box-description
   {
     margin-top: 15px;
@@ -225,6 +236,7 @@ export default Vue.extend({
     color: white;
     background: #282754;
     position: relative;
+    white-space: pre-line;
   }
 
   #blackout, .blackout
@@ -294,7 +306,6 @@ export default Vue.extend({
 
   .service-box-grid-appearance
   {
-    cursor: pointer;
     justify-self: center;
     text-align: center;
     display: flex;
@@ -308,7 +319,12 @@ export default Vue.extend({
     background: white;
   }
 
-  .service-box-grid-appearance:hover
+  .service-box-grid-appearance-hover
+  {
+    cursor: pointer;
+  }
+
+  .service-box-grid-appearance-hover:hover
   {
     filter: brightness(85%);
   }
@@ -360,9 +376,42 @@ export default Vue.extend({
       display: none;
     }
 
+    .popup-box
+    {
+      position: relative;
+      margin-top: 100px;
+      width: 70vw;
+      height: auto;
+      font-size: 1.25em;
+    }
+
+    .popup-box-title
+    {
+      height: 75px;
+    }
+
+    .popup-box-title>img
+    {
+      content: url('~@/assets/purple-back.png');
+      top: -100px;
+      right: 90vw;
+      left: -5vw;
+      margin: 0 auto;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+    }
+
     #services-example-box
     {
       flex-direction: column;
+    }
+
+    .popup-box-description
+    {
+      height: auto;
+      font-size: 1em;
+      padding-bottom: 20px;
     }
 
     .services-example-box-premium

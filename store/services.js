@@ -40,7 +40,7 @@ export const state = () => ({
     {
       serviceName: 'Enterprise',
       imageSrc: 'backend_logo.png',
-      description: 'Enterprise awesomeness, right!'
+      description: 'Enterprise Development is a premium service. Therefore, full stack development for a charity organisation.\n\nThis service provides all the services in the free tier and helps deploy the technology for an end-to-end solution.\n\nApplications and vetting are required to receive this service.'
     },
     {
       serviceName: 'Marketing',
