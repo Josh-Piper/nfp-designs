@@ -71,7 +71,7 @@ export default Vue.extend({
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 700px;
+    width: 850px;
     height: 175px;
     background: #195748;
     padding: 20px;
@@ -152,6 +152,14 @@ export default Vue.extend({
     font-size: 1.25em;
   }
 
+  @media only screen and (max-width : 1000px)
+  {
+    .mailing-list-container
+    {
+      width: 80%;
+    }
+  }
+
   /* Appearance for phones */
   @media only screen and (max-width : 600px)
   {
@@ -161,7 +169,6 @@ export default Vue.extend({
       flex-direction: column;
       text-align: center;
       height: 300px;
-      width: 80vw;
       font-size: 1.5em;
       padding-bottom: 75px;
     }
