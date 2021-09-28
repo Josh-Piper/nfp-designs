@@ -258,22 +258,50 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 
+interface WebDevSkill {
+  name: string,
+  value: string,
+  text: string
+}
+
+interface CompletedForm {
+  'form-name': string,
+  'form-company-name': string,
+  'form-email-address': string,
+  'form-phone-nunber': string,
+  'form-comments': string,
+  'form-job-role': string,
+  'form-service-type': string,
+  'form-web-skills': string[]
+}
+
+interface ContactButton {
+  colorCode: string,
+  enquiryText: string
+}
+
+interface BasicFormData {
+  text: string,
+  name: string,
+  placeholder: string
+}
+
 export default Vue.extend({
   data () {
     return {
-      enquirySelect: '',
+      enquirySelect: '' as string,
       contactButtons: [
         { colorCode: '#195748', enquiryText: 'General Enquiry' },
         { colorCode: '#4C4AA5', enquiryText: 'Service Enquiry' },
         { colorCode: '#028FBC', enquiryText: 'Volunteering & Contributing' }
-      ],
+      ] as ContactButton[],
       // relevant to all forms
       basicFormData: [
         { text: 'Your name', name: 'form-name', placeholder: 'John Doe' },
         { text: 'Company name', name: 'form-company-name', placeholder: 'Google' },
         { text: 'Email address', name: 'form-email-address', placeholder: 'djohn@google.com' },
         { text: 'Phone nunber', name: 'form-phone-number', placeholder: '04-john' }
-      ],
+      ] as BasicFormData[],
       // additional form data
       additionalFormData: {
         'General Enquiry': [],
@@ -299,7 +327,7 @@ export default Vue.extend({
         { name: 'form-node', value: 'node', text: 'NodeJS' },
         { name: 'form-vue', value: 'vue', text: 'VueJS' },
         { name: 'form-serverless', value: 'serverless', text: 'ServerLess' }
-      ],
+      ] as WebDevSkill[],
       // maintain ALL of the different form information
       form: {
         'form-name': '',
@@ -310,10 +338,10 @@ export default Vue.extend({
         'form-job-role': '',
         'form-service-type': '',
         'form-web-skills': []
-      },
-      formError: false,
-      showWebDevSkill: false,
-      formSubmitted: false
+      } as CompletedForm,
+      formError: false as boolean,
+      showWebDevSkill: false as boolean,
+      formSubmitted: false as boolean
     }
   },
   computed: {

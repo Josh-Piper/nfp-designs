@@ -8,7 +8,7 @@
         Have a question that needs answering?
       </div>
       <div id="faq-question-needs-answer-search-bar">
-        <SearchBar :search-placeholder="'Got a specific question?'" />
+        <SearchBar :search-placeholder.sync="searchPlaceholder" />
       </div>
     </div>
 
@@ -58,7 +58,7 @@
 
       <!-- Error message to let the user know that there were no results -->
       <p v-show="isQuestionsAndAnswersEmpty">
-        No results found
+        No results found for "{{ searchPlaceholder }}"
       </p>
 
       <!-- Accordian load more button -->
@@ -99,6 +99,7 @@
         </a>
       </div>
     </div>
+
     <Footer class="footer-main" />
   </div>
 </template>
@@ -117,12 +118,13 @@ interface QuestionAndAnswer {
 export default Vue.extend({
   data () {
     return {
-      indexesShown: [0],
-      itemsToLoad: 5,
-      orderedBy: 'All',
-      customSorter: '',
-      questionToSubmit: '',
-      hasSubmittedQuestion: false
+      indexesShown: [] as number[],
+      itemsToLoad: 5 as number,
+      orderedBy: 'All' as string,
+      customSorter: '' as string,
+      questionToSubmit: '' as string,
+      searchPlaceholder: 'Got a specific question?' as string,
+      hasSubmittedQuestion: false as boolean
     }
   },
   computed: {
@@ -156,6 +158,7 @@ export default Vue.extend({
     orderedBy (oldValue, newValue) {
       if (oldValue !== newValue) {
         this.indexesShown = []
+        this.itemsToLoad = 5
       }
     }
   },
@@ -167,7 +170,6 @@ export default Vue.extend({
       this.orderedBy = 'Custom'
       this.customSorter = sorter
     }
-    this.indexesShown = []
   },
   methods: {
     ...mapMutations('faq', ['addQuestion']),
