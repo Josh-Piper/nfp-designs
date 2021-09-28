@@ -57,7 +57,7 @@ export default Vue.extend({
   },
   data () {
     return {
-      isMenuOpen: false
+      isMenuOpen: false as boolean
     }
   },
   // Map the different links from Vuex

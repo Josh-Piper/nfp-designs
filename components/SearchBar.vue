@@ -30,8 +30,8 @@ export default Vue.extend({
   },
   data () {
     return {
-      searchQuery: '',
-      placeholder: ''
+      searchQuery: '' as string,
+      placeholder: '' as string
     }
   },
   mounted () {

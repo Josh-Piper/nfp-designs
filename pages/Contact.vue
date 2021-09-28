@@ -213,7 +213,17 @@
               name="comments"
               placeholder="Enter information regarding your query"
               :style="`background: ${getCorrespondingFormColor()};`"
+              :maxlength="maxCharacters"
             />
+            <span
+              :style="`background: ${getCorrespondingFormColor()};`"
+              style="align-self: flex-end; font-size: 0.75em;"
+            >
+              {{ maxCharacters - form['form-comments'].length }}
+              /
+              {{ maxCharacters }}
+              characters
+            </span>
           </div>
 
           <!-- Form error message (valdiation) -->
@@ -341,7 +351,8 @@ export default Vue.extend({
       } as CompletedForm,
       formError: false as boolean,
       showWebDevSkill: false as boolean,
-      formSubmitted: false as boolean
+      formSubmitted: false as boolean,
+      maxCharacters: 300 as number
     }
   },
   computed: {
@@ -381,6 +392,16 @@ export default Vue.extend({
       } else {
         this.formError = false
         this.formSubmitted = true
+        this.form = {
+          'form-name': '',
+          'form-company-name': '',
+          'form-email-address': '',
+          'form-phone-nunber': '',
+          'form-comments': '',
+          'form-job-role': '',
+          'form-service-type': '',
+          'form-web-skills': []
+        }
       }
 
       // We can use the current selected enquiry type and the form completed
