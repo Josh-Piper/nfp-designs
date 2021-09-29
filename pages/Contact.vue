@@ -36,7 +36,15 @@
     </p>
     <div id="reason-for-contacting">
       <!-- Create each button -->
-      <div id="reason-for-contacting-buttons">
+      <transition-group
+        id="reason-for-contacting-buttons"
+        tag="div"
+        mode="out-in"
+        appear
+        :css="false"
+        @before-enter="beforeEnter"
+        @enter="enter"
+      >
         <a
           v-for="(item, index) in contactButtons"
           :key="index"
@@ -45,15 +53,14 @@
         >
           {{ item.enquiryText }}
         </a>
-      </div>
+      </transition-group>
     </div>
 
     <!-- The actual contact form(s) -->
     <p v-show="enquirySelect !== ''" class="section-header-text">
       {{ enquirySelect }}
     </p>
-
-    <div v-show="enquirySelect !== ''">
+    <div v-show="enquirySelect !== ''" class="transitioner">
       <div id="contact-form">
         <form
           :style="`background: ${getCorrespondingFormColor()};`"
@@ -261,7 +268,6 @@
         </form>
       </div>
     </div>
-
     <Footer class="footer-main" />
   </div>
 </template>
@@ -356,6 +362,20 @@ export default Vue.extend({
     }
   },
   methods: {
+    // transitions
+    beforeEnter (el: HTMLDivElement) {
+      el.style.transform = 'scale(1.2)'
+    },
+    enter (el: HTMLDivElement) {
+      el.style.transition = 'scale 1000ms easy-in-out'
+
+      getComputedStyle(el)
+
+      setTimeout(() => {
+        el.style.transform = 'scale(1)'
+      }, 500)
+    },
+    // methods
     submitContact () {
       const isValid = !(
         this.form['form-name'] === '' ||

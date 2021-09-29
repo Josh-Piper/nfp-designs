@@ -6,18 +6,6 @@
       Blog hero consists of most viewed article and links to the different categories
     -->
     <div id="blog-hero">
-
-      <!-- Draw the different blog sorting methods, i.e. the different categories -->
-      <div id="blog-hero-buttons-container">
-        <a
-          v-for="(category, index) in allCategories"
-          :key="index"
-          @click="setSort(category)"
-        >
-          {{ category }}
-        </a>
-      </div>
-
       <!-- The blog hero displays the most viewed blog post -->
       <div id="most-viewed-blog-post">
 
@@ -28,6 +16,16 @@
         >
         <!-- Blog details -->
         <div id="most-viewed-blog-post-text">
+          <!-- Draw the different blog sorting methods, i.e. the different categories -->
+          <div id="blog-hero-buttons-container">
+            <a
+              v-for="(category, index) in allCategories"
+              :key="index"
+              @click="setSort(category)"
+            >
+              {{ category }}
+            </a>
+          </div>
           <div id="most-viewed-blog-post-text-title">
             {{ mostViewedPost.title }}
           </div>
@@ -164,8 +162,11 @@ export default Vue.extend({
   {
     background: #494949;
     color: white;
-    margin: 0 30px;
+    width: 100%;
     margin-top: 30px;
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
   }
 
   /* Styling for category buttons (used for sorting the blog posts) */
@@ -186,10 +187,12 @@ export default Vue.extend({
   {
     background: #494949;
     display: flex;
+    height: auto;
     flex-direction: row-reverse;
     justify-content: space-around;
     align-items: flex-end;
     padding: 0 20px;
+    padding-top: 15px;
   }
 
   /* Static dimensions set to allow for adequate spacing for large screens */
@@ -202,6 +205,7 @@ export default Vue.extend({
   /* Formatting for hero blog post text */
   #most-viewed-blog-post-text
   {
+    height: 400px;
     background: #494949;
     color: white;
     display: flex;
@@ -214,6 +218,7 @@ export default Vue.extend({
     font-size: 2em;
     font-weight: bold;
     background: #494949;
+    height: auto;
   }
 
   #most-viewed-blog-post-text-description
@@ -223,6 +228,7 @@ export default Vue.extend({
     line-height: 1.25em;
     display: flex;
     align-items: center;
+    height: auto;
     margin-bottom: 50px;
   }
 
@@ -395,17 +401,21 @@ export default Vue.extend({
   }
 
   /* Mobile layout */
-  @media only screen and (max-width : 600px)
+  @media only screen and (max-width : 700px)
   {
     /* Hero formatting, makes everything in a column layout */
     #blog-hero-buttons-container
     {
-      font-size: 1.5em;
+      display: flex;
+      font-size: 1em;
+      justify-items: center;
+      align-content: center;
+      margin: 0;
     }
 
     #most-viewed-blog-post
     {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: center;
     }
 
@@ -419,6 +429,11 @@ export default Vue.extend({
     {
       width: 90vw;
       margin-top: 20px;
+    }
+
+    #most-viewed-blog-post>img
+    {
+      display: none;
     }
 
     #most-viewed-blog-post-text
@@ -446,6 +461,17 @@ export default Vue.extend({
     .blog-post
     {
       width: 80vw;
+    }
+  }
+
+  /* Make categories apppear vertically for small screens */
+  @media only screen and (max-width : 345px)
+  {
+      /* Hero formatting, makes everything in a column layout */
+    #blog-hero-buttons-container
+    {
+      flex-direction: column;
+      flex-wrap: none;
     }
   }
 

@@ -80,6 +80,7 @@
             v-model.trim="comment"
             type="text"
             placeholder="Join the discussion"
+            @keyup.enter="uploadComment"
           >
           <a @click="uploadComment">
             POST COMMENT
@@ -88,7 +89,7 @@
       </div>
     </div>
 
-    <div class="mailing-list-container">
+    <div v-if="!redirecting" class="mailing-list-container">
       <MailingList />
     </div>
     <Footer class="footer-main" />
@@ -219,7 +220,7 @@ export default Vue.extend({
     width: 850px;
     background: white;
     overflow-x: hidden;
-    border-radius: 30px;;
+    border-radius: 30px;
   }
 
   /* Blog post appearance, post's details */
@@ -331,6 +332,11 @@ export default Vue.extend({
     filter: brightness(110%);
     font-weight: bold;
     font-style: italic;
+  }
+
+  #blog-comments
+  {
+    box-shadow: 0px 0px 5px rgb(189, 189, 189);
   }
 
   /* Comment section appearance (actual post and header) */

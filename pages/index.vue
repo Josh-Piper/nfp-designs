@@ -4,10 +4,25 @@
 
     <!-- All details are drawn from a JSON file to represent APIs for the front-end -->
     <!-- NFP Designs main services -->
-    <p class="section-header-text">
-      Wanting to get started quickly? Choose your Required Need!
-    </p>
-    <div id="about-hero">
+    <transition
+      appear
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+    >
+      <p v-show="isLoaded" class="section-header-text">
+        Wanting to get started quickly? Choose your Required Need!
+      </p>
+    </transition>
+
+    <transition-group
+      id="about-hero"
+      tag="div"
+      appear
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+    >
       <div v-for="(item, index) in heroContent" :key="index">
         <HeroAdvert
           :title="item.title"
@@ -16,13 +31,28 @@
           :background-color="item.backgroundColor"
         />
       </div>
-    </div>
+    </transition-group>
 
     <!-- NFP Designs Explanations -->
-    <p class="section-header-text">
-      What is NFP Designs and how does it work?
-    </p>
-    <div id="about-nfp-descriptions">
+    <transition
+      appear
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+    >
+      <p v-show="isLoaded" class="section-header-text">
+        What is NFP Designs and how does it work?
+      </p>
+    </transition>
+
+    <transition-group
+      id="about-nfp-descriptions"
+      tag="div"
+      appear
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+    >
       <div v-for="(item, index) in servicesAndExplanations" :key="index" class="about-nfp-descriptions-container">
         <div class="about-nfp-descriptions-title" :style="`background: ${getColorForExplanation(item.title)}`">
           {{ item.title }}
@@ -31,7 +61,7 @@
           {{ item.content }}
         </div>
       </div>
-    </div>
+    </transition-group>
 
     <!-- NFP Design Portfolio -->
     <p class="section-header-text">
@@ -80,11 +110,31 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 
 export default Vue.extend({
+  data () {
+    return {
+      isLoaded: false
+    }
+  },
   computed: {
     // Map the different Vuex json details as an object.
     ...mapState('about', ['heroContent', 'servicesAndExplanations', 'portfolio'])
   },
+  mounted () {
+    this.isLoaded = true
+  },
   methods: {
+    beforeEnter (el: HTMLDivElement) {
+      el.style.opacity = '0'
+    },
+    enter (el: HTMLDivElement) {
+      el.style.transition = 'opacity 1000ms ease-in-out'
+
+      getComputedStyle(el)
+
+      setTimeout(() => {
+        el.style.opacity = '1'
+      }, 1000)
+    },
     // These methods are for setting the colour for the UI
     getColorForExplanation (explanation: string): string {
       if (explanation === 'Our Motive') {
@@ -109,6 +159,7 @@ export default Vue.extend({
 </script>
 
 <style>
+
   /*
   Note, these are the only NON-SCOPED styles
   Hence, remove all default styling and take up 100% of the screen
@@ -179,10 +230,11 @@ export default Vue.extend({
   /* Set the appearance for the NFP eexplanations about how it works */
   #about-nfp-descriptions
   {
+    align-self: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100%;
+    width: 75%;
   }
 
   /* Set the container to be based on percentages for responsiveness */
@@ -296,8 +348,13 @@ export default Vue.extend({
   }
 
   /* Update the website for responsiveness */
-  @media only screen and (max-width : 1100px)
+  @media only screen and (max-width : 1400px)
   {
+    #about-nfp-descriptions
+    {
+      width: 100%;
+    }
+
     .about-nfp-descriptions-container
     {
       font-size: 1.25em;
