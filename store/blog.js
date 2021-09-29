@@ -64,7 +64,17 @@ export const state = () => ({
        Its baby framework and library React has grown substantially over the years.\
        \n\nSo, how does it par up to its competitors such as Google\'s Angular, and \
        Evan You\'s VueJS ',
-      comments: []
+      comments: [
+        {
+          message: 'Nisha: Great article, vouch for Shiva'
+        },
+        {
+          message: 'Ting-Chieh Lin: Wow, I learnt so much'
+        },
+        {
+          message: 'Shang: Wow I never knew JavaScript was converted to C++'
+        }
+      ]
     }
   ],
   blogAuthors: [
@@ -89,7 +99,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  postComment (state, index, newMessage) {
-    state.blogPosts[index].comments.push(newMessage)
+  postComment (state, payload) {
+    state.blogPosts[payload.index].comments.push({ message: payload.message })
   }
 }

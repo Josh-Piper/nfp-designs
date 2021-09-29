@@ -201,7 +201,7 @@ export default Vue.extend({
     right: 0;
     margin: auto;
     width: 50vw;
-    height: 300px;
+    height: 350px;
     position: absolute;
     display: flex;
     flex-direction: column;
