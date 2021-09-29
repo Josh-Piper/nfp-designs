@@ -23,7 +23,7 @@
       @before-enter="beforeEnter"
       @enter="enter"
     >
-      <div v-for="(item, index) in heroContent" :key="index">
+      <div v-for="(item) in heroContent" :key="item.title">
         <HeroAdvert
           :title="item.title"
           :steps="item.steps"
@@ -53,7 +53,7 @@
       @before-enter="beforeEnter"
       @enter="enter"
     >
-      <div v-for="(item, index) in servicesAndExplanations" :key="index" class="about-nfp-descriptions-container">
+      <div v-for="(item) in servicesAndExplanations" :key="item.title" class="about-nfp-descriptions-container">
         <div class="about-nfp-descriptions-title" :style="`background: ${getColorForExplanation(item.title)}`">
           {{ item.title }}
         </div>
@@ -123,10 +123,10 @@ export default Vue.extend({
     this.isLoaded = true
   },
   methods: {
-    beforeEnter (el: HTMLDivElement) {
+    beforeEnter (el: HTMLDivElement): void {
       el.style.opacity = '0'
     },
-    enter (el: HTMLDivElement) {
+    enter (el: HTMLDivElement): void {
       el.style.transition = 'opacity 1000ms ease-in-out'
 
       getComputedStyle(el)

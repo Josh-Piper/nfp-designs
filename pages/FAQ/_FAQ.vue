@@ -148,7 +148,7 @@ export default Vue.extend({
   watch: {
     // Check for changes if the FAQ ordering is changed. Reset indexes
     // to prevent an issues
-    orderedBy (oldValue, newValue) {
+    orderedBy (oldValue: string, newValue: string): void {
       if (oldValue !== newValue) {
         this.indexesShown = []
         this.itemsToLoad = 5
@@ -158,7 +158,7 @@ export default Vue.extend({
   // The searching method is currently hooked into the route
   // should be changed into search queries ?=
   mounted () {
-    const sorter = this.$route.params.FAQ
+    const sorter: string | undefined = this.$route.params.FAQ
     if (sorter) {
       this.orderedBy = 'Custom'
       this.customSorter = sorter

@@ -119,7 +119,7 @@ export default Vue.extend({
   },
   watch: {
     // Begin countdown when the user wants to be redirected
-    redirecting (newValue) {
+    redirecting (newValue: boolean): void {
       if (newValue) {
         setTimeout(() => {
           this.timeout--
@@ -127,7 +127,7 @@ export default Vue.extend({
       }
     },
     timeout: {
-      handler (numSeconds) {
+      handler (numSeconds: number): void {
         // When timer is out, redirect
         if (numSeconds <= 0) {
           this.$router.go(-1)
@@ -370,7 +370,7 @@ export default Vue.extend({
   }
 
   /*
-    Make the blog post and comments width to be responsive 
+    Make the blog post and comments width to be responsive
     (for smaller desktops and tablets)
   */
   @media only screen and (max-width : 1200px)

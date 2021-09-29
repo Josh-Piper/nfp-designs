@@ -46,8 +46,8 @@
         @enter="enter"
       >
         <a
-          v-for="(item, index) in contactButtons"
-          :key="index"
+          v-for="(item) in contactButtons"
+          :key="item.enquiryText"
           :style="`background: ${item.colorCode};`"
           @click="updateEnquiryText(item.enquiryText)"
         >
@@ -326,7 +326,7 @@ export default Vue.extend({
         'form-email-address': '',
         'form-phone-nunber': '',
         'form-comments': '',
-        'form-job-role': '',
+        'form-job-role': 'Marketer',
         'form-service-type': '',
         'form-web-skills': []
       } as CompletedForm,
@@ -343,19 +343,19 @@ export default Vue.extend({
     }
   },
   watch: {
-    currentJobRoleIsDeveloper (newVal) {
+    currentJobRoleIsDeveloper (newVal: boolean): void {
       if (newVal) {
         this.showWebDevSkill = true
       } else {
         this.showWebDevSkill = false
       }
     },
-    enquirySelect (newValue) {
+    enquirySelect (newValue: string): void {
       if (newValue === 'General Enquiry' || newValue === 'Service Enquiry') {
         this.showWebDevSkill = false
       } else if (
         newValue === 'Volunteering & Contributing' &&
-          this.form['form-job-role'].toLowerCase().includes('developer')
+          this.form['form-job-role']?.toLowerCase().includes('developer')
       ) {
         this.showWebDevSkill = true
       }
@@ -363,10 +363,10 @@ export default Vue.extend({
   },
   methods: {
     // transitions
-    beforeEnter (el: HTMLDivElement) {
+    beforeEnter (el: HTMLDivElement): void {
       el.style.transform = 'scale(1.2)'
     },
-    enter (el: HTMLDivElement) {
+    enter (el: HTMLDivElement): void {
       el.style.transition = 'scale 1000ms easy-in-out'
 
       getComputedStyle(el)
@@ -376,7 +376,7 @@ export default Vue.extend({
       }, 500)
     },
     // methods
-    submitContact () {
+    submitContact (): void {
       const isValid = !(
         this.form['form-name'] === '' ||
         this.form['form-email-address'] === '' ||
@@ -387,13 +387,14 @@ export default Vue.extend({
       } else {
         this.formError = false
         this.formSubmitted = true
+        // reset form
         this.form = {
           'form-name': '',
           'form-company-name': '',
           'form-email-address': '',
           'form-phone-nunber': '',
           'form-comments': '',
-          'form-job-role': '',
+          'form-job-role': 'Marketer',
           'form-service-type': '',
           'form-web-skills': []
         }
