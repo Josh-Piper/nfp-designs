@@ -450,6 +450,11 @@ export default Vue.extend({
       padding-bottom: 30px;
     }
 
+    .portfolio-item
+    {
+      width: 85vw;
+    }
+
     .footer-main
     {
       max-height: 175px;

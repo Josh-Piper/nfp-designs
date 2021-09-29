@@ -28,7 +28,7 @@
       <!-- When the user submits the form, let them know it was successful -->
       <p
         v-show="isSubmitted"
-        style="background: #195748; color: #028FBC;"
+        style="background: #195748; color: #028FBC; margin: 0; padding: 0;"
       >
         Joined email list successfully
       </p>
@@ -168,7 +168,7 @@ export default Vue.extend({
     {
       flex-direction: column;
       text-align: center;
-      height: 300px;
+      height: 350px;
       font-size: 1.5em;
       padding-bottom: 75px;
     }
